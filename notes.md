@@ -188,3 +188,51 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
             boolean t1 = true;
             int n1 = t1; // error
             ```
+
+2. Forced Convert.
+    1. introduce: high-precision data convert to low-precision data, need to add forced mark `()`, and it will may lost precision or out of memory.
+            ```java
+            int i = (int) 1.9; // i is  1;
+            
+            int n2 = 2000;
+            byte b1 = (byte) n2; // max number of byte is 127, so it will be out of memory
+            ```
+    2. detail:
+        1. big data to small data, will be forced convert.
+        2. forced symbol '()' is effect the closest operation, so sometimes need a bracket to raise priority.
+            ```java
+            int x = (int) 10 * 3.5 + 6 * 1.5; // error, final result is double cannot be assign to int.
+            int y = (int)(10 * 3.5 + 6 * 1.5); // ok
+            ```
+        3. char can be stored the value of int, but cannot be stored the variable of int, need to be converted.
+            ```java
+            char c1 = 100; // ok
+            int m = 100;
+            char c2 = m; // error, int cannot be assign to char.
+            char c3 = (char) m; // ok, output is d that ASCII is 100;
+            ```
+        4. Whether byte or short is computed, it will be treated as int.
+## Convert between primitive data and String.
+1. primitive data to String
+    1. add `""` Symbol.
+        ```java
+        int n1 = 1;
+        float f1 = 1.1f;
+
+        // convert
+        String s1 = n1 + ""; // String 1
+        String s2 = f1 + ""; // String 1.1
+        ```
+2. String to primitive data.
+    1. using parseXX funcion in primitive type;
+        ```java
+        String s1 = "1";
+        int n1 = Integer.parseInt(s1); // int 1
+        ```
+    2. String to char.
+        ```java
+        String s1 = "123";
+        char c1 = s1.chatAt(0); // char 1
+        ```
+
+# chapter 4 p63
