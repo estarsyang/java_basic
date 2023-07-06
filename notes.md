@@ -235,4 +235,111 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
         char c1 = s1.chatAt(0); // char 1
         ```
 
-# chapter 4 p63
+# chapter 4 Operators
+
+## Operators
+1. introduction: a special symbol, used to indicate d data compute, assign and compare.
+2. type:
+    1. arithmetic operators
+    2. assignment operators
+    3. relational operators
+    4. logical operators
+    5. bitwise operators
+    6. conditional operators
+## Arithmetic operators
+1. type:
+    1. +(plus), - (minus), / (division), % (remainder), * (time), ++(increment operator), -- (decrement operator)
+2. Special Case.
+    ```java
+    10.0 / 4; // 2.5
+    10 / 4; // 2
+
+    // remider operator %
+    // % is equal to  a % b -->> a - a / b * b, so
+    -10 % 3; // -1, -10 - (-10) / 3 * 3
+    10 % -3; // 1, 10 - 10/(-3) * -3
+    -10 % -3; // -1, -10 - (-10) / (-3) * (-3)
+    ```
+3. Exercise01
+    ```java
+    int i = 1;
+    i = i++; // (1) temp = i; (2) i = i + 1; (3) i = temp; so, result is the data of temp, it's 1.
+    System.out.println(i); // 1
+
+    // another case
+    int i = 1;
+    i = ++i; // (1) i = i + 1;(2) temp = i;  (3) i = temp; so, result is the data of temp, it's 1.
+    System.out.println(i); // 2
+    ```
+4. Exercise02
+    ```java
+    // convert Fahrenheit to Celsius. its formular is 5/9*(Fahrenheit-100)
+    double fahrenheitDegree = 245.6;
+    double temperture = 5/9*(fahrenheitDegree-100);
+    System.out.println(temperture); // 0.0, why? cuz 5/9 is 0, so 0 times anythins is 0. how to fix it.
+
+    double fahrenheitDegree = 245.6;
+    double temperture = 5.0/9*(fahrenheitDegree-100); // modify formular, int to double.
+    System.out.println(temperture); // 80.88888888888
+
+    ```
+
+## Relational operators
+1. type:
+    1. ==
+    2. !=
+    3. <
+    4. >
+    5. <=
+    6. >=
+    7. instanceof
+
+## Logical operators
+1. Introduction: using to connect more Ternary, final result is a boolean value.
+2. Type
+    1. AND &&, both sides are true, result is true
+    2. OR ||, one side is true, result is true.
+    3. NOT !, !true is false, !false is true.
+
+## Assignment operators
+1. Introduction: assign value to a variable.
+2. Special case.
+    1. muplite assignment will be transformed.
+    ```java
+    byte b = 3;
+    b += 2; // ok, equal to b = (byte)(b + 2);
+    b++; // ok, equal to b = (byte)(b + 1);
+
+    // but if u do this, it will be error.
+    byte a = 3;
+    a = a + 2; // error, int can't be assign to byte.
+    ```
+
+## Ternary operators
+1. Introduction: basic expression is `condition expression ? expression1 : expression2;` if condition is true, expression1 will be executed. otherwise, expression2 will be executed.
+    ```java
+    int a = 4;
+    int b = 5;
+    int c = a < b ? 10 : 20;
+    System.out.println(c); // 10
+    ```
+
+2. Max number(three number)
+    ```java
+    int n1 = 1;
+    int n2 = 2;
+    int n3 = 3;
+
+    // good, easy to understand
+    int max1 = n1 > n2 ? n1 : n2;
+    int max2 = max1 > n3 ? max1 : n3;
+    System.out.println(max2);
+
+    // bad, difficult to understand
+    int max = (n1 > n2 ? n1 : n2) > n3 ? (n1 > n2 ? n1 : n2) : n3
+    ```
+
+## Operators precedence(Descending)
+![Operators precedence](./images/Operators%20precedence.png)
+
+> p82 next lecture
