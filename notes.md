@@ -149,7 +149,7 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     2. detail
         1. 0 and 1 can't be present false and true, boolean can be only present true and false.
 
-## Three primitive data type auto transformer
+## 3 primitive data type auto transformer
 1. Auto Transformer
     1. introduce: when java is calculated or assigned, low-precision types will be automatically converted to high-precision types.
     2. Sort by ascending base on Precision.
@@ -342,4 +342,95 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
 ## Operators precedence(Descending)
 ![Operators precedence](./images/Operators%20precedence.png)
 
-> p82 next lecture
+
+
+## Identifier
+1. Introduction: Identifiers in Java are a sequence of characters to identify something in a program. They are names given to a `class, variable, package, method, or interface` and allow the programmer to refer to the specific item from any place in the program.
+1. Rules:
+    1. Consist of letters, numbers, `_` or `$`.
+    2. Can't start with number, ```int 3ab = 1; // error```
+    3. Can't use keyword or reserved word.
+    4. Strictly case sensitive, but the length is not limit.
+    5. Can't use space. ```int a b = 90; // error```
+
+2. Standard
+    1. Package Name: multiple words, lower case.```aaa.bbb.ccc; // com.hsp.crm;```
+    2. Class name, interface name: multiple words, all words start with uppper case(UpperCamelCase). ```XxxYyyZzz; // TankShotGame```
+    3. Variable, function name: multiple words, first word uses lower case, the other words start with uppper case(lowerCamelCase).```xxxYyyZzz; // tankShotGame```
+    4. Constant name: all words need to be upper case.```XXX_YYY_ZZZ; // TAX_RATE```
+    5. more detail show team's standard.
+
+
+## KeyWord
+1. Types:
+    1. class
+    2. int
+    3. if  
+    4. ...
+
+## Reserved Word
+1. Types:
+    1. byValue
+    2. cast
+    3. goto
+    4. ...
+
+## Keyboard input
+1. Introduction: Programs sometimes need to accept input data by the user, then it need to a ```Scanner```.
+2. Scanner:
+    1. Steps:
+        1. Import the package. ```java.util.*```.
+        2. Create the Object(declare variables)
+        3. Executed the funtion.
+
+## Hexadecimal
+1. Types:
+    1. Binary: 0 or 1. Start with ```0b``` or ```0B```.
+    2. Decimal: 0 ~ 9.
+    3. Octal: 0 ~ 7. Start with ```number 0```.
+    4. Hexadecimal: 0 ~ F. Start with ```0X``` or ```0x```.
+2. Convert.
+    1. ...
+
+## Bit operations.
+1. ...
+
+## True Form, 1's Complement Code and 2's Complement Code.
+
+
+# Chapter 5 control
+1. Type:
+    1. Sequence control
+    2. Branch control
+    3. loop control
+    4. break
+    5. continue
+    6. return
+2. Sequence control
+    1. Introduction: normal code, no branches control, loop control and so on.
+        ```java
+        int a = 1;
+        int b = 2;
+        ...
+        ```
+
+3. Branch control
+    1. Single Branch
+    2. Double branches
+    3. Nesting branches. (no more than 3 branches.)
+    4. Switch
+4. Loop control
+    1. for
+    2. while
+    3. do while
+    4. Special case(an empty stars)
+        ```java
+        /**
+         *          *
+         *      *       *
+         *  *               *
+         * *******************
+         * // just like above output
+         */
+        ```
+5. p137 exercise
