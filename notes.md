@@ -433,4 +433,10 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
          * // just like above output
          */
         ```
-5. p137 exercise
+5. Break
+    1. Introduction: jump out of a loop.
+    2. label, don't use if possible because reading is bad.
+6. Continue
+    1. Introduction: breaks one iteration (in the loop)
+7. Return
+    1. Introduction: jump out of a function or a program.
