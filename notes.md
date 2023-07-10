@@ -398,7 +398,7 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
 ## True Form, 1's Complement Code and 2's Complement Code.
 
 
-# Chapter 5 control
+# Chapter 5 Control
 1. Type:
     1. Sequence control
     2. Branch control
@@ -440,3 +440,57 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     1. Introduction: breaks one iteration (in the loop)
 7. Return
     1. Introduction: jump out of a function or a program.
+
+# Chapter6 Array, sort and find.
+
+## Array
+
+1. Introduction: Store multiple same data types data. It also is an reference type.
+2. Array initialization.
+    1. Dynamic initialization:
+        1. method 1: ```dataType arrayName[] = new dataType[size]```
+            ```java
+            int a[] = new int[5];
+            ```
+        2. method 2: ```dataType arrayName[]``` or ```dataType[] arrayName```
+            ```java
+            int a[];
+            a = new int[5];
+
+            // or
+            int[] b;
+            b = new int[5];
+            ```
+    2. Static initialization.
+        1. Grammar: ```dataType arrayName[] = {element1,..., elementN};```
+            ```java
+            int a[] = {1,2,3,4,5,6};
+            ```
+3. Tips:
+    1. Array store same type data unless auto convert.
+    2. it will has a default value without assignment after initialization. ```int 0, short 0, byte 0, long 0, float 0.0, double 0.0, char \u0000, boolean false, String null```
+    3. Careful out of boundary.
+
+4. Array reverse
+    ```java
+    int arr[] = {11,22,33,44,55,66};
+    // rules
+    // swap arr[0] and arr[5], {66,22,33,44,55,11}
+    // swap arr[1] and arr[4], {66,55,33,44,22,11}
+    // swap arr[2] and arr[3], {66,55,44,33,22,11}
+    // only need three times, length / 2
+    // swap index is arr[i] and arr[arr.length - 1 - i];
+    int temp = 0;
+    int len = arr.length;
+    for(int i = 0; i < len / 2; i++) {
+        temp = arr[len - 1 - i];
+        arr[len - 1 - i] = arr[i];
+        arr[i] = temp;
+    }
+    ```
+5. Array resize
+    1. Resize factor
+    2. loop
+    3. arraycopy
+
+6. Bubble Sort
