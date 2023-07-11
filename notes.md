@@ -595,3 +595,84 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
         }
     }
     ```
+
+# Chapter 7 Object oriented
+
+1. Why need object?
+    1. Easy to represent a multiple data, action. for example, a man, he has age, name, tail, weight. Other data structures are not easy to present. And then, person has actions, like play basketball, eatting. primary data can not present this. array is also.
+
+2. Object
+    1. Property
+    2. Action
+
+3. Class and object relationship
+    1. Class is one data type, like Cat, Dog....
+    2. Object is the instance of class
+4. Class and object example
+    ```java
+    /* Tom has two cats, one is bengal, 2 years old, yellow. 
+    Other one is ragoll, 3 years old, white. when you input the name of cat, print the property of the cat. 
+    if name is not exist, print name is not exist.
+    */
+
+    // no class and object.
+    String cat1Name = "bengal";
+    int cat1Age = 2;
+    Color cat1Color = "yellow";
+
+    String cat2Name = "ragoll";
+    int cat2Age = 3;
+    Color cat2Color = "white";
+
+    String inputName = "bengal";
+
+    if(inputName == cat1Name) {
+        System.out.println(cat1Name);
+        System.out.println(cat1Age);
+        System.out.println(cat1Color);
+    } else if(inputName == cat1Name) {
+        // ... the same as cat1XX
+    } else {
+        System.out.println(inputName + "is not exist").
+    }
+
+    // it's so long and ugly. And the number of cat is less(if 100 cats need 300 variables). 
+    // the most important is not easy to present actions(eat, jump and so on...), but class and object can do all this easily.
+
+    // class and object.
+    // 1. define a class, Cat
+    class Cat {
+        // property
+        String name;
+        int age;
+        String color;
+    }
+
+    // 2. Instantiate cats
+    Cat cat1 = new Cat();
+    cat1.Name = "bengal";
+    cat1.age = 2;
+    cat1.color = "yellow";
+
+
+    Cat cat1 = new Cat();
+    cat2.Name = "ragoll";
+    cat2.age = 3;
+    cat2.color = "white";
+
+    if(inputName == cat1.name) {
+        System.out.println(cat1.name);
+        System.out.println(cat1.age);
+        System.out.println(cat1.color);
+    } else if (intpuName == cat2.name) {
+        // the same as cat1
+    } else {
+        System.out.println(inputName + "is not exist").
+    }
+
+    // above code show more structur, and object easily 
+    // adding property and actions. Cat add properties and 
+    // actions, all instances has properties and actions. 
+    // no need to define more variables.
+
+    ```
