@@ -494,3 +494,104 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     3. arraycopy
 
 6. Bubble Sort
+
+7. Search
+    1. SequenceSearch: loop to find and return index. If not, return -1;
+    2. BinarySearch(Algorithm)
+
+## multi-dimentional array
+
+1. Two dimentional array.
+	```java
+	/*
+		output below base on two dimentional array
+		0 0 0 0 0 0
+		0 0 1 0 0 0
+		0 2 0 3 0 0
+		0 0 0 0 0 0
+	*/
+	int[][] arr = {{0, 0, 0, 0, 0, 0},{0, 0, 1, 0, 0, 0},{0, 2, 0, 3, 0, 0},{0, 0, 0, 0, 0, 0}};
+	
+	for(int i = 0;i < arr.length;i++){
+		
+		for(int j = 0; j < arr[i].length;j++){
+			System.out.print(arr[i][j] + "\t");
+		}
+		System.out.println();
+	}
+	```
+2. Initialization
+	1. Dynamic initialization 1. ```dataType[][] ArrayName = new dataType[size][size]```
+    ```java
+    int a[][] = new int[2][3];
+
+    // or
+    int[][] b = new int[2][3];
+    ```
+    2. Dynamic initialization 2. ```dataType[][] ArrayName; ArrayName = new dataType[size][size]```
+
+    3. Dynamic initialization 3, length of each array is not equal.
+    ```java
+    /*
+    print by using two dimentional array.
+    1
+    2 2
+    3 3 3
+
+    */
+
+    int[][] arr = new int[3][];
+    for(int i = 0; i < arr.length;i++) {
+
+        arr[i] = new int[i + 1];
+        for(int j = 0; j < arr[i].length;j++){
+            arr[i][j] = i + 1;
+        }
+    }
+
+    for(int i = 0; i < arr.length;i++) {
+        for(int j = 0; j < arr[i].length;j++){
+            System.out.print(arr[i][j] + "\t");
+        }
+        System.out.println();
+    }
+    
+    ```
+
+    4. Static initialization,```dataType[][] ArrayName = {{},{},{},...{}}```
+    ```java
+    int arr[][] = {{1,1,1}, {8,8,9},{100}};
+    ```
+
+5. YangHui's triangle or Pascal's triangle
+    ```java
+    /*
+        output 10 level reuslt like this:
+        1
+        1 1
+        1 2 1
+        1 3 3 1
+        1 4 6 4 1
+        ...
+
+        rules:
+        1. First and last item is 1 in each level.
+        2. The number of item in each level is equal to the number of the level.
+        3. Except the first and last item, each item is equal to previous item plus the current item in previous level. for example, level 5, 3rd item, 6 = 3 + 3.( level 4, 2nd item + 3rd item).
+        arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+    */
+    int level = 10;
+    int arr[][] = new int[level][];
+
+    for (int i = 0;i < arr.length;i++) {
+        arr[i] = new int[i + 1];
+
+        for (int j = 0;j < arr[i].length;j++){
+            if (j == 0 || j == arr[i].length - 1){
+                arr[i][j] = 1;
+            } else {
+                arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+            }
+        }
+    }
+    ```
