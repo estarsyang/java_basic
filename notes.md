@@ -676,3 +676,47 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     // no need to define more variables.
 
     ```
+
+5. Field or Property
+    1. Grammer: Access modifier + Property type + Property name.
+    2. Access modifier:
+        1. public
+        2. proctected
+        3. default
+        4. private
+    3. Property type: could be any type
+    4. Property is not assigned, it has default value. the rules same like array. ``` int 0, short 0,...boolean false```
+
+6. Create Class and access properties.
+    ```java
+
+    Cat myCat = new Cat();
+    
+    Cat myCat1;
+    myCat1 = new Cat();
+
+    // access
+    myCat.name;
+    // ...
+
+    ```
+
+7. Analy of structure of Java memory
+    1. Stack: usually store primary data type(local variable)
+    2. Heap: store Object(Cat, cat, array and so on)
+    3. Method Area: Constant Pool(Class Constant Pool) store constant, like String. the information of Class.
+
+8. Methods of Class
+    ```java
+    class Person {
+
+        public void speak() {
+            System.out.println("Hello");
+        }
+    }
+    ```
+    1. public: access modifier
+    2. void: no return after execute this method
+    3. speak: method name.
+
+9. P205
