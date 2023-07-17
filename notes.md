@@ -598,6 +598,8 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
 
 # Chapter 7 Object oriented
 
+## Object
+
 1. Why need object?
     1. Easy to represent a multiple data, action. for example, a man, he has age, name, tail, weight. Other data structures are not easy to present. And then, person has actions, like play basketball, eatting. primary data can not present this. array is also.
 
@@ -706,7 +708,7 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     2. Heap: store Object(Cat, cat, array and so on)
     3. Method Area: Constant Pool(Class Constant Pool) store constant, like String. the information of Class.
 
-8. Methods of Class
+8. Functions of Class
     ```java
     class Person {
 
@@ -716,7 +718,104 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     }
     ```
     1. public: access modifier
-    2. void: no return after execute this method
+    2. void: no return after execute this method, returen any data type will show the data type. int need return int, void no need to return.
     3. speak: method name.
+    4. Method body({}): the detail of method
 
-9. P205
+9. Advantance of functions
+    1. DRY(don't not repeat yourself)
+    2. Hide detail of implement, other person is easy to use.
+
+10. Tips in using functions
+    1. One functions could have 0 and many parameters, using commas to separated.
+    2. Parameters could be any data type, including primivates and reference data type.
+    3. Calling a method with parameters, the input parameters must be the same as the parameters of functions or compatible data type.
+    4. When a function is called, the values passed to the function are known as actual arguments. The parameters specified in the function definition are called formal arguments. Data type, number, order must be same between formal arguments and actual arguments.
+    5. Functions can be directly called in the same class.
+    6. Functions in different class, it could be called base on className.function or (instance of class).function
+    7. Calling different class's functions is limite by access modifier.
+
+11. The root of the values passed in functions.
+    1. Primitive data type
+        1. Pass value into functions, modify formal arguments could not affect actual arguments.
+    2. Reference data type
+        1. Pass reference address into functions, When the value of reference data is changed in function, the value of outsite of reference data is also changed. Modify formal arguments could affect actual arguments.
+
+## Recursion
+
+## Introduction
+method call itself, each time pass into different variable.
+
+## Example
+
+1. factorial
+    ```java
+    public int factorial(int n) {
+        if(n == 1) {
+            return 1;
+        } else {
+            return factorial(n - 1) * n;
+        }
+    }
+    ```
+
+## tips
+
+1. Setting base rules
+
+setting base rules prevent StackOverflowError
+
+## Exercises
+
+1. Fibonacci
+    ```java
+    // use recusion to implement fibonacci.
+    // 1 1 2 3 5 8 ...
+    /*
+    rules:
+    1. n = 1, result is 1
+    2. n = 2, result is 1
+    3. n = 3, result is 2
+    4. n = 4, result is 3
+    5. ....
+    When n >= 3, the result of n is equal to sum of the result of n - 2 and the result of n - 1
+    */
+
+    public int fibonacci(int n) {
+        if(n == 1 || n == 2){
+            return 1;
+        } else {
+            return fibonacci(n - 2) + fibonacci(n - 1);
+        }
+            
+    }
+    ```
+
+2. Number of peach
+    ```java
+    /* There are lots of peaches, a monkey fisrt day eats half of the peaches, and eats more one.
+    In the following days the monkey eat half of 
+    peaches and more one. When in the 10th day, there are only one peach. 
+    Question: what's the number of peaches?
+
+    Analysis: reverse
+        day         peach       
+    1. 10th day    1 peach
+    2. 9th day     (day10 + 1) * 2 = 4
+    3. 8th day     (day9 + 1) * 2 = 10
+    4. ...
+    The pattern is the number of peaches at nth day  = (the number of peaches at (n+1) day + 1) * 2
+
+    */
+    public int peach(int day) {
+        if(day == 10) {
+            return 1;
+        } else {
+            return (peach(day + 1) + 1) * 2;
+        }
+    }
+
+    peach(1); // 1534
+    peach(9); // 4
+    ```
+3. p222
