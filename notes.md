@@ -466,7 +466,7 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
             ```java
             int a[] = {1,2,3,4,5,6};
             ```
-3. Tips:
+3. Notes:
     1. Array store same type data unless auto convert.
     2. it will has a default value without assignment after initialization. ```int 0, short 0, byte 0, long 0, float 0.0, double 0.0, char \u0000, boolean false, String null```
     3. Careful out of boundary.
@@ -726,7 +726,7 @@ javadoc -d 输出的文件夹 -xx -yy xx.java 输出某个java文件的文档注
     1. DRY(don't not repeat yourself)
     2. Hide detail of implement, other person is easy to use.
 
-10. Tips in using functions
+10. Notes in using functions
     1. One functions could have 0 and many parameters, using commas to separated.
     2. Parameters could be any data type, including primivates and reference data type.
     3. Calling a method with parameters, the input parameters must be the same as the parameters of functions or compatible data type.
@@ -759,7 +759,7 @@ method call itself, each time pass into different variable.
     }
     ```
 
-## tips
+## Notes
 
 1. Setting base rules
 
@@ -818,4 +818,140 @@ setting base rules prevent StackOverflowError
     peach(1); // 1534
     peach(9); // 4
     ```
-3. p222
+## Games base on recursion
+
+1. Maze
+2. Tower of Hanoi
+3. Eight queens
+
+## Overload
+
+1. Introduction: Same function name but formal can't be the same. for example, 
+    ```java
+    System.out.println(5);// int 
+    System.out.println("hello"); // string
+    // println could be passed into int, string and so on. there is a example for overload
+    ```
+2. Advantage
+    1. Increasing the readability of program
+    2. Provides flexibility
+    3. Make code clean
+    4. Use code again which save memory.
+
+3. Notes
+    1. Function name: msut be same
+    2. Formal argument list: must be different.(order or data type or number must be different)
+    3. Retrun type: no request
+
+## Variable parameters
+1. Introduction: Java allow the same class has multiple functions which the same name, same function but number of arguments are different to encapsulate.
+
+2. Grammer
+    ```java
+    // access modifier + return data type + function name(dataType... formalName){}
+    ```
+
+3. Example
+    ```java
+    /*
+    Calculate sum of two, three, four numbers. And so on....
+    */
+    // 1. ... represent access variable parameters, int... represent access int variable parameters
+    // 2. Formal argument is an array-like which has length arrtribute.
+    public int sum(int... nums) {
+
+    }
+    ```
+
+4. Notes
+    1. Actual arguments could be 0 or many variables.
+        ```java
+        public int vp(int... nums) {
+            int res = 0;
+            for(int i = 0;i < nums.length;i++) {
+                res +=nums[i];
+            }
+            return res;
+        }
+
+        int sum = vp(1,2,3); // 6
+        ```
+    2. Actual arguments could be array.
+        ```java
+        public int vp(int... nums) {
+            int res = 0;
+            for(int i = 0;i < nums.length;i++) {
+                res +=nums[i];
+            }
+            return res;
+        }
+
+        int[] arr = {1,2,3};
+        int sum = vp(arr); // 6
+        ```
+    3. The root of variables parameters is array.
+    4. Parameters and variable parameter could be together in a function, but the variable parameters must be the last position.
+        ```java
+        public int vp(int a, int... b){} // ok
+        public int vp1(int... a, int b){} // error, variable parameters must be the last position if multiple formal arguments.
+        ```
+    5. One formal arguments list could only have one variable parameters. ```public int vp(int... a, int... b){} // error, only have one variable parameters```
+
+## Scope
+
+1. Introduction: Define where a certain varibale or method is accessible in a program.
+
+2. Type:
+    1. Gobal variable(it is usually properties in class)   
+    properties, define in class. can directly assign a value or not. it has default value.
+    ```java
+    class Person {
+        // age is gobal variable, could be using in class Person anywhere.
+        int age = 10;
+        int gobalNum;
+
+        // n and name are local variable
+        public void cry() {
+            int n = 10;
+            int name = "jack";
+            System.out.println("age"); // ok
+        }
+
+        public void hi() {
+            System.out.println(gobalNum); // ok, default value, 0
+        }
+
+    }
+    ```
+    
+    2. Local variable   
+    usually define in functions, outside can't be used. must be assigned before using.
+    ```java
+    class Person {
+        int age = 10;
+
+        // n and name are local variable, only can use in cry function. using in outside will be error.
+        public void cry() {
+            int n = 10;
+            int name = "jack";
+            System.out.println("age"); // ok
+        }
+
+        public void cry() {
+            System.out.println(name); // error, can't find name.
+        }
+
+        public void hi() {
+            int localNum;
+            System.out.println(localNum); // error, not assign a inital value.
+        }
+
+    }
+    ```
+
+3. Notes
+    1. Gobal and local variable could be the same name. Using the variable in which scope that the variable will be the value of the scope.
+    2. Same scope can't be the same name. for example, Gobal scope, can't be the same name varibale.
+    3. Gobal variable lifecycle is actived in the object until the object not use and GC recycle it. Local variable lifecycle is actived in function until function end of execution. GC recycle it.
+
+4. p239
