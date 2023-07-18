@@ -1136,3 +1136,51 @@ setting base rules prevent StackOverflowError
 4. Games base on object.
     1. Mora     
        mora between tom and computer, 0 - rock, 1 - paper, 2 - scissors. 3 times, output the number of win.
+
+## Chapter 8 Object oriented(medium)
+
+1. IntelliJ ide
+    1. shortcut(macos)
+        1. Delete line: command + detele
+        2. Duplicate line: command + d
+        3. Code completion: control + space
+        4. Comments: command+ + /
+        5. import utils in current line: option + enter
+        6. Format code: option + command + l
+        7. Quick run code: command + r
+        8. Generate constructor: option + enter or command + n
+        9. Show the hierarchy of class: control + h
+        10. Quick find function in current position: command + b
+        11. Auto assign variables name: the end of line add `.var`
+        12. Clost other code tab: command + w
+        13. Switch code tab: control + left or control + right
+
+2. Package
+    1. Introduction: used to group related class, avoid name conflictes and write a better maintainable code.
+    2. Grammer: `package` packageName, `package com.test`
+        1. `package` is keyword.
+        2. `com.test` is package name.
+    3. Root of package: create different folders or content to save class file.
+    4. Example  
+       create two package to save the same name class `Dog`
+    5. Package name rules:  
+       Only including number, letter, _, ., but can't start with number, no keyword and reserve word
+       ```java
+       // demo.class.exec1 // error, keyword
+       // demo.12a // error, start with number
+       // demo.ab12.oa // ok
+       
+       ```
+    6. Package name recommend:  
+       small letter + `.`, usually `com.companyName.projectName.bussinessModulName`
+       ```java
+       // com.apple.crm.user
+       // com.google.search.user
+       ```
+    7. Java package(most common)
+        1. java.lang.* (basic package, default import, no need import)
+        2. java.util.* (util package)
+        3. java.net.* (network package)
+        4. java.awt.* (view package, GUI)
+    8. p278
+
