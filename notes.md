@@ -953,5 +953,186 @@ setting base rules prevent StackOverflowError
     1. Gobal and local variable could be the same name. Using the variable in which scope that the variable will be the value of the scope.
     2. Same scope can't be the same name. for example, Gobal scope, can't be the same name varibale.
     3. Gobal variable lifecycle is actived in the object until the object not use and GC recycle it. Local variable lifecycle is actived in function until function end of execution. GC recycle it.
+    4. Gobal varibales/properties, could be used in its class and other class(xClass.xProperty or (instance of xClass).xProperty). Local variables can only use in its class's functions.
+    5. Modifier: Gobal variables/properties can use modifier but local variables not.
 
-4. p239
+## Constructor
+
+1. Introduction: A special method is used to initialize objects. it can be used to set initial values for object properties.
+
+2. Grammer: [modifier] functionName(formal arguments list){function body}
+    1. Modifier can be default, public, protected, private.
+    2. Constructor no return value.
+    3. Function name and class name must be same.
+    4. Arguments list and functions are the same rules.
+    5. The calling of constructor by system. When Creating an object, system will be auto calling the constructor of the class to initialize object.
+
+3. Example
+    ```java
+    class Person{
+        String name;
+        int age;
+
+        public Person(String pName, int pAge) {
+            name = pName;
+            age = pAge;
+        }
+    }
+
+    // main 
+
+    Person p1 = new Person("tom", 12);
+    // p1.name --> tom
+    // p1.age --> 12
+    ```
+
+4. Notes
+    1. One class could have many constructors, just like function overload.
+        ```java
+        class Person{
+            String name;
+            int age;
+
+            public Person(String pName, int pAge) {
+                name = pName;
+                age = pAge;
+            }
+            // ok, overload
+            public Person(String pName) {
+                name = pName;
+            }
+        }
+        ```
+    2. Constructor name must be the same as class name.
+    3. Constructor no return value.
+    4. COnstructor initialize object not create object.
+    5. Auto calling constructor when create object.
+    6. If programmer doesn't write an constructor, system will be auto generate a default no arguments constructor. Using `javap` command to convert `class` file to `java` file to show the default constructor.
+        ```java
+        class Person{
+
+            // will be auto generated an default constructor.
+        }
+        ```
+    7. Once writing constructor of one class, there will be not default constructor unless define one empty constructor.
+        ```java
+        class Person{
+            String name;
+            // will be auto generated an default constructor.
+            public Person(String pName) {
+                name = pName;
+            }
+            // self define a default empty constructor
+            public Person() {
+
+            }
+        }
+        ```
+
+5. Flow of creating an object.([demo link](https://www.bilibili.com/video/BV1fh411y7R8/?p=245&spm_id_from=pageDriver&vd_source=d71377f649cfc8d319aa45ec353a83f5))
+    ```java
+    /*
+    Describe the flow of below code. Including heap, stack, method area and others.
+    */
+    class Person {
+        int age = 90;
+        String name;
+
+        public Person(String n, int a) {
+            name = n;
+            age = a;
+        }
+    }
+
+    // main
+    Person p =  new Person("tom", 20);
+    ```
+    1. Method area import class information, including properties and functions, only once.
+    2. Arrange an address in stack of this object.
+    3. Finish initializing object.
+        1. default initial: age = 0; name = null;
+        2. Assign value: age = 90; name = null;
+        3. Constructor initial: age = 20; name = "tom";
+    4. Define a variable named `p` in heap, and assign the address which arrange in stack to `p`.
+
+## This
+
+1. Introduction: `this` keyword refers to **the current object** in a function or constructor. The most common use of the `this` keyword is **to eliminate the confusion between class attributes and parameters with the same name**. `this` can also be used to:
+    1. Invoke current class constructor.
+    2. Invoke current class function.
+    3. Return the current class object.
+    4. Pass an argument in the function call.
+    5. Pass an argument in the constructor call.
+    ```java
+    // this example
+
+    class Person {
+        int age;
+        String name;
+        // strange, if formal argument name is the same as properties name is good.
+        public Person(String pName, int pAge) { 
+            name = pName;
+            age = pAge;
+        }
+
+        // directly using the same name it can't work. Since name,age in this block are the formal argument not properties. Properties still have default value.
+        public Person(String name, int age) { 
+            name = name;
+            age = age;
+        }
+
+        // using this can solve this.
+        public Person(String name, int age) { 
+            this.name = name;
+            this.age = age;
+        }
+    }
+    ```
+
+2. Tips: If you want to compare two object is the same or not, use `hashCode` is one easy method to compare. Since each object has different hash code and object has the method name `hashCode` to return the hash code of the object.
+
+3. Notes:
+    1. `this` represnt object which calls functions.
+        ```java
+        Person p1 = new Person('tom');
+        Person p2 = new Person('bob');
+        Person p3 = new Person('kobe');
+
+        
+        public void cry() {
+            System.out.println(this.name + " is crying");
+        }
+
+        p1.cry(); // tom is crying
+        p2.cry(); // bob is crying
+        p3.cry(); // kobe is crying
+
+        // which one call function and this present which one.
+
+        ```
+    2. `this` can access the properties, functions, constructors.
+    3. `this` can distinguish properties and local variables.
+    4. Access functions grammer: this.functionName(arguments).
+    5. Access constructor grammer: this(arguments); only using in constructor(call another constructor in an constructor). The position of `this(arguments)` must be in the top of function body.
+        ```java
+        class Person {
+
+            String name;
+
+            public Person() {
+                this("tom"); 
+                // call Person(String name){} function.
+                // Call another constructor(base on the formal argument list) in one constructor.
+            }
+
+            public Person(String name) {
+                this.name = name;
+            }
+        }
+
+        ```
+    6. `this` can't be used in outside of class, only using in functions in class.
+
+4. Games base on object.
+    1. Mora     
+       mora between tom and computer, 0 - rock, 1 - paper, 2 - scissors. 3 times, output the number of win.
