@@ -1182,5 +1182,57 @@ setting base rules prevent StackOverflowError
         2. java.util.* (util package)
         3. java.net.* (network package)
         4. java.awt.* (view package, GUI)
-    8. p278
+    8. Import package: import as few package as possible
+        1. `import java.util.Scannner;`
+        2. `import java.util.*;`
+    9. Notes:
+        1. The function of package is declare current class is belong to which package. 
+        So only one package declare in an class file. And the declare must be top of files(except comments)
+        2. `import` commands could be more and no order, but must under `package` declare.
 
+## Access modifier
+
+1. Introduction: java provide four asscess modifiers to control access of `functions` and `properties`.
+2. Types:
+    1. `public`: open to all.
+    2. `protected`: open to subclass and the class in the same package.
+    3. `default`: not access modifier is default, open to the class in the same package.
+    4. `private`: only itself class could use it, don't open to anywhere.
+3. rules    
+    |type|same class|same package|subclass|different package|
+    |----|----|----|----|----|
+    |public|ok|ok|ok|ok|
+    |protected|ok|ok|ok|x|
+    |default|ok|ok|x|x|
+    |private|ok|x|x|x|
+4. Notes:
+    1. Modifier could be modified properties, functions and class.
+    2. Only `default` and `public` could be modified class! And obey the rules.
+
+## Feature of object oriented - Encapsulation, Inheritance, Polymorphism
+
+1. Encapsulation
+    1. Introduction: is a mechanism of wrapping the data(variables) and code acting on the data(methods) together as single unit. In encpasulation, the varables of a class will be hidden from other class, and can be accessed only through the methods of their current class.
+    2. Case
+        1. TV remote: TV is an encapsulation, throw out methods(TV remote) to access data and methods(TV remote can open/close TV, and access storage of TV).
+    3. Advantage
+        1. Hide implementation detail.
+        2. Verify data to ensure safe.
+    4. Step
+        1. `private` properties can't not directly modify properties.
+        2. Provide a **public** set method to verify and assign data.
+            ```java
+            public void setXxx(dataType argument) {
+                // verify data logic
+                property1 = argument
+                // ...
+            }
+            ```
+        3. Provide a **public** get method to get value of data.
+            ```java
+            public XX getXxx() {
+                // access control logic
+                return xx;
+            }
+            ```
+p283
