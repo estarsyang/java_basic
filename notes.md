@@ -1137,58 +1137,58 @@ setting base rules prevent StackOverflowError
     1. Mora     
        mora between tom and computer, 0 - rock, 1 - paper, 2 - scissors. 3 times, output the number of win.
 
-## Chapter 8 Object oriented(medium)
+# Chapter 8 Object oriented(medium)
 
-1. IntelliJ ide
-    1. shortcut(macos)
-        1. Delete line: command + detele
-        2. Duplicate line: command + d
-        3. Code completion: control + space
-        4. Comments: command+ + /
-        5. import utils in current line: option + enter
-        6. Format code: option + command + l
-        7. Quick run code: command + r
-        8. Generate constructor: option + enter or command + n
-        9. Show the hierarchy of class: control + h
-        10. Quick find function in current position: command + b
-        11. Auto assign variables name: the end of line add `.var`
-        12. Clost other code tab: command + w
-        13. Switch code tab: control + left or control + right
+## IntelliJ ide
+1. shortcut(macos)
+    1. Delete line: command + detele
+    2. Duplicate line: command + d
+    3. Code completion: control + space
+    4. Comments: command+ + /
+    5. import utils in current line: option + enter
+    6. Format code: option + command + l
+    7. Quick run code: command + r
+    8. Generate constructor: option + enter or command + n
+    9. Show the hierarchy of class: control + h
+    10. Quick find function in current position: command + b
+    11. Auto assign variables name: the end of line add `.var`
+    12. Clost other code tab: command + w
+    13. Switch code tab: control + left or control + right
 
-2. Package
-    1. Introduction: used to group related class, avoid name conflictes and write a better maintainable code.
-    2. Grammer: `package` packageName, `package com.test`
-        1. `package` is keyword.
-        2. `com.test` is package name.
-    3. Root of package: create different folders or content to save class file.
-    4. Example  
-       create two package to save the same name class `Dog`
-    5. Package name rules:  
-       Only including number, letter, _, ., but can't start with number, no keyword and reserve word
-       ```java
-       // demo.class.exec1 // error, keyword
-       // demo.12a // error, start with number
-       // demo.ab12.oa // ok
-       
-       ```
-    6. Package name recommend:  
-       small letter + `.`, usually `com.companyName.projectName.bussinessModulName`
-       ```java
-       // com.apple.crm.user
-       // com.google.search.user
-       ```
-    7. Java package(most common)
-        1. java.lang.* (basic package, default import, no need import)
-        2. java.util.* (util package)
-        3. java.net.* (network package)
-        4. java.awt.* (view package, GUI)
-    8. Import package: import as few package as possible
-        1. `import java.util.Scannner;`
-        2. `import java.util.*;`
-    9. Notes:
-        1. The function of package is declare current class is belong to which package. 
-        So only one package declare in an class file. And the declare must be top of files(except comments)
-        2. `import` commands could be more and no order, but must under `package` declare.
+## Package
+1. Introduction: used to group related class, avoid name conflictes and write a better maintainable code.
+2. Grammer: `package` packageName, `package com.test`
+    1. `package` is keyword.
+    2. `com.test` is package name.
+3. Root of package: create different folders or content to save class file.
+4. Example  
+    create two package to save the same name class `Dog`
+5. Package name rules:  
+    Only including number, letter, _, ., but can't start with number, no keyword and reserve word
+    ```java
+    // demo.class.exec1 // error, keyword
+    // demo.12a // error, start with number
+    // demo.ab12.oa // ok
+    
+    ```
+6. Package name recommend:  
+    small letter + `.`, usually `com.companyName.projectName.bussinessModulName`
+    ```java
+    // com.apple.crm.user
+    // com.google.search.user
+    ```
+7. Java package(most common)
+    1. java.lang.* (basic package, default import, no need import)
+    2. java.util.* (util package)
+    3. java.net.* (network package)
+    4. java.awt.* (view package, GUI)
+8. Import package: import as few package as possible
+    1. `import java.util.Scannner;`
+    2. `import java.util.*;`
+9. Notes:
+    1. The function of package is declare current class is belong to which package. 
+    So only one package declare in an class file. And the declare must be top of files(except comments)
+    2. `import` commands could be more and no order, but must under `package` declare.
 
 ## Access modifier
 
@@ -1211,28 +1211,59 @@ setting base rules prevent StackOverflowError
 
 ## Feature of object oriented - Encapsulation, Inheritance, Polymorphism
 
-1. Encapsulation
-    1. Introduction: is a mechanism of wrapping the data(variables) and code acting on the data(methods) together as single unit. In encpasulation, the varables of a class will be hidden from other class, and can be accessed only through the methods of their current class.
-    2. Case
-        1. TV remote: TV is an encapsulation, throw out methods(TV remote) to access data and methods(TV remote can open/close TV, and access storage of TV).
-    3. Advantage
-        1. Hide implementation detail.
-        2. Verify data to ensure safe.
-    4. Step
-        1. `private` properties can't not directly modify properties.
-        2. Provide a **public** set method to verify and assign data.
-            ```java
-            public void setXxx(dataType argument) {
-                // verify data logic
-                property1 = argument
-                // ...
+## Encapsulation
+1. Introduction: is a mechanism of wrapping the data(variables) and code acting on the data(methods) together as single unit. In encpasulation, the varables of a class will be hidden from other class, and can be accessed only through the methods of their current class.
+2. Case
+    1. TV remote: TV is an encapsulation, throw out methods(TV remote) to access data and methods(TV remote can open/close TV, and access storage of TV).
+3. Advantage
+    1. Hide implementation detail.
+    2. Verify data to ensure safe.
+4. Step
+    1. `private` properties can't not directly modify properties.
+    2. Provide a **public** set method to verify and assign data.
+        ```java
+        public void setXxx(dataType argument) {
+            // verify data logic
+            property1 = argument
+            // ...
+        }
+        ```
+    3. Provide a **public** get method to get value of data.
+        ```java
+        public XX getXxx() {
+            // access control logic
+            return xx;
+        }
+        ```
+5. Example
+    1. Person detail    
+    A person has name, age and salary, All properties will be reasonable, otherwise give default value. （implementation: chapter8 object oriented(medium)/packageControl/src/com/edu/encap/Encapsulation01.java)
+        1. age: 1 - 120; default: 18;
+        2. name: 2 - 6; default: anonymous.
+        3. salary: can't directly access.
+    2. Account implementation: chapter8 object oriented(medium)/packageControl/src/com/edu/encap/Account.java and AccountTest.java)
+    two class, `Account`, `AccountTest`.
+        1. `Account`: name(2-4), balance(>20), password(6 numbers). if not, show warning and assign default.
+        2. Assign value base on setXxxx.
+        3. Test in `AccountTest`.
+6. Constructor with Encapsulation
+    1. Introduction: Sometimes constructor will be directly initialized properties and don't verify data. To avoid this case, constructor directly call setXxx methods to initialize properties.
+        ```java
+        class Person{
+
+            public Person(String name, int age, double salary) {
+                this.setName(name);
+                this.setAge(age);
+                this.setSalary(salary);
             }
-            ```
-        3. Provide a **public** get method to get value of data.
-            ```java
-            public XX getXxx() {
-                // access control logic
-                return xx;
-            }
-            ```
-p283
+        }
+        ```
+
+## Inheritance
+1. Introduction: is a mechanism in which one object acquires all the properties and behaviors of a parent object.
+2. Why need it? For example, two calss, one is `Pupils`, other one is `Graduate`. There are many same properties and methods, if we all define them, they will cost many time and many memory. the important is, one thing is changed, you need to modify more. Base on above all, the advantages of inheritance are code reusability(save time and memory), easily maintain.
+3. Grammer: `class subClassXXX extends paranetClassXXX {}`, subClass will be auto to inherit properties and methods of parentClass.
+4. Notes
+    1. SubClass inherit all properties and methods from parentClass. But `private` properties and methods can't access directly, need to call public methods to access.
+    2. SubClass must call the constructor of parentClass to initialize parentClass.
+    3. When create an object of subclass, the constructor which no argument constructor of parentClass will be automatically called. if parentClass has no none argument constructor, there will be necessary to call `super` methods in the subclass's constructor. if not, compile will be error.
