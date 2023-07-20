@@ -1266,4 +1266,110 @@ setting base rules prevent StackOverflowError
 4. Notes
     1. SubClass inherit all properties and methods from parentClass. But `private` properties and methods can't access directly, need to call public methods to access.
     2. SubClass must call the constructor of parentClass to initialize parentClass.
-    3. When create an object of subclass, the constructor which no argument constructor of parentClass will be automatically called. if parentClass has no none argument constructor, there will be necessary to call `super` methods in the subclass's constructor. if not, compile will be error.
+    3. When create an object of subclass, the constructor which no argument constructor of parentClass will be automatically called. if parentClass has no none argument constructor and has arguments constructor, there will be necessary to call `super` methods in the subclass's constructor. if not, compile will be error. `super` represent that constructor of parentClass.
+    4. If you want to call the constructor of parentClass, you need to call it by using `super(arguments)`.
+    5. `super()` must be in the first line in the subclass constructor.
+    6. `super()` and `this()` all must be in the first line in the constructor, so they can't exist together in one constructor.
+    7. All class in java is subclass of `Object` class.
+    8. Calling constructor of parentClass not only parent but grandparent and until `Object`. Calling order from top to bottom is `Object`, parentClas, subclass.
+    9. Subclass can only inherit one class means that only one parentClass, java is single inheritance.
+    10. Inheritance can't be abused, relationship between subclass and parentClass need to obey `is-a` relationship. For example, **Steve Jobs** is a person, Jobs can inherit `Person`, but he can't inherit `Plane`.
+5. The theory of inheritance.
+    ```java
+    class GrandPa {
+        String name = "grandPa";
+        String hobby = "travel";
+    }
+
+    class Father extends GrandPa{
+        String name = "father";
+        int age = 39;
+    }
+
+    class Son extends Father {
+        String name = "son";
+    }
+    ```
+    Theory shows in below picture.
+    ![inheritance](/images/jave%20memory-inheritance.png)
+6. Exercise
+    1. `B` extends `A`, what's the output?
+        ```java
+        class A {
+            A() {
+                System.out.print("A");
+            }
+            A(String name) {
+                System.out.print("A name");
+            }
+        }
+
+        class B extends A {
+            B() {
+                this("tom"); // call this() and will not call super() again.
+                System.out.print("B");
+            }
+            B(String name) {
+                // in this place will called super()
+                System.out.print("B name");
+            }
+        }
+
+        // main
+        B b1 = new B();
+
+        // output is
+        // A B name B. Important, this() and super() can't exist same constructor. 
+        ```
+    2. `C` extends `B`, `B` extends `A`, what's the output?
+        ```java
+        class A {
+            public A() {
+                System.out.println("A");
+            }
+        }
+
+        class B extends A {
+            public B() {
+                System.out.println("B");
+            }
+            
+            public B(String name) {
+                System.out.println(name + " B name");
+            }
+        }
+
+        class C extends B {
+            public C() {
+                this("hello");
+                System.out.println("B");
+            }
+            
+            public C(String name) {
+                super("hi");
+                System.out.println(name + " C name");
+            }
+        }
+        
+        // main
+        C c = new C();
+
+        // output
+        /*
+            A
+            hi B name
+            hello C name
+            B
+        */ 
+        ```
+
+## super
+
+1. Introduction: represent the reference of parentClass. use to access the properties, methods, constructor.
+2. Grammer: 
+    1. Access properties: `super.propterty`, but can't access `private` properites.
+    2. Access methods: `super.method(arugemts)`, but can't access `private` methods.
+    3. Access constructors: `super()` or `super(arguments)`, must be in the first line in subclass constructor. only call once.
+3. Advantages:
+    1. Call constructors of parentClass: initialize parents's properties by parents, initialize subclass's properties by subclass.
+    2. Same properties and methods in subclass and parentClass, to access the properites and methods in parent class must use `super`. if not the same name, using `this` or `super` is ok.
