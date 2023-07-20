@@ -1373,3 +1373,200 @@ setting base rules prevent StackOverflowError
 3. Advantages:
     1. Call constructors of parentClass: initialize parents's properties by parents, initialize subclass's properties by subclass.
     2. Same properties and methods in subclass and parentClass, to access the properites and methods in parent class must use `super`. if not the same name, using `this` or `super` is ok.
+    3. `super` not limit in parent class, if grandpa class or higer class have same name properties and methods and parent class doesn't have them, it will be access grandpa class or super-classes.
+4. `this` and `super` compare
+    |No.|type|this|super|
+    |----|----|----|----|
+    |1|access properties|current class if not exist and search parentClass until `Object`.|parent or super-classes|
+    |2|methods call|current class,  if not exist and search parentClass until `Object`.| parent or super-classes|
+    |3|constructor call|constructor in current class,must be in the first line in constructor|parent's constructor, must be in the first line in subclass's constructor|
+    |4|others|represent current object|subclass access parent's object|
+
+## Override
+
+1. Introduction: allows a subclass or child class to provide a `specific implementation` of a method that is `already provided` by one of its super-classes or parent classes. Same name, same arguments.
+    ```java
+    // parent class
+    public void bark(){};
+
+    // subclass 
+    @Override
+    public void bark(){}; // override
+
+    public void bark(String name){}; // not override, since arguemnts are different. overload
+
+    
+    
+    ```
+2. Notes
+    1. Name, arguments of subclass's methods must be the same as parent class's.
+    2. Same return data type or subclass of parent class return data type, for example, parent class return `Object`, and subclass return `String`, it's ok. Since `String` is the subclass of `Object`. But parent class return `String`, subclass return `Object`, it's error.
+    3. Subclass can't narrow the scope of access, expand is ok.
+        ```java
+        // parent class
+        public void bark(){};
+
+        // subclass
+        void bark(){}; // error, decrease access. public > default.
+        ```
+3. Override and overload
+    ||scope|method name|arguments list|return|access modifier|
+    |----|----|----|----|----|----|
+    |overload|same class|must be same|must be different|no limit|no limit|
+    |override|subclass and parent class|must be same|must be same|must be same or subclass(return data type of subclass must be subclass of return data type of parent class)|can't narrow the scope of parent class|
+
+## Polymorphism
+
+1. Introduction: is the ability of an object to take on `many forms`. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object. Any Java object that can pass more than one IS-A test is considered to be polymorphic
+2. Why need polymorphim? for example, you(`master`) have many `animal`, many `food`. and you need to `feed`a special animal with a special food. like `cat` love `fish`, `dog` love `bone` and so on. what do you implememt this code? Base on above knowledges, you may write below code like this.
+    ```java
+    
+    // Animal class
+    class Animal { /**/}
+    // Cat
+    class Cat extends Animal {/**/}
+    // Dog
+    class Dog extends Animal {/**/}
+
+    // Food class
+    class Food { /**/}
+    // Fish
+    class Fish extends Food {/**/}
+    // Bone
+    class Bone extends Food {/**/}
+
+    // Master
+    class Master {
+        // ...
+
+        // bone to dog
+        public void feed(Dog dog, Bone bone) {
+            System.out.println(bone + "is fed to " + dog);
+        }
+
+        // fish to cat
+        public void feed(Cat cat, Fish fish) {
+            System.out.println(fish + "is fed to " + cat);
+        }
+        // ....
+    }
+    ```
+But, there are many animals and many foods, you can't write a special `feed` to feed each animal with each food. there is awful. Boss will kill you. So we need `polymorphism`.
+3. Example in polymorphism
+    1. Overload and override
+        ```java
+        public void say(String name) {}
+        public void say(String name, int age) {}
+
+        // Person behavior
+        Person p1 = new Person();
+        p1.say("bob");
+        p1.say("tom", 12);
+
+        // say has many form.
+        ```
+4. Polymorphism in Object
+    1. Compile-time type and run-time type could be different.
+    2. Compile-time type is determinded when declare an object, it can't be changed.
+    3. Run-time type can be changed.
+    4. When a variable is declared, left of `=` is its compile-time type(never change), right of `=` is its run-time type(can change when running).
+        ```java
+        Animal animal = new Dog(); // animal's compile-time type is Animal, but run-time type is Dog.
+        animal = new Cat(); // animal's compile-time type is Animal, but run-time is already Cat.
+        ```
+        1. Exampole
+            ```java
+
+            // Animal
+            class Animal {
+                // ...
+                public cry() {
+                    System.out.println("Animal cry");
+                }
+            }
+
+            // Dog
+            class Dog extends Animal {
+                // ...
+                public cry() {
+                    System.out.println("Dog cry");
+                }
+            }
+
+            // Cat
+            class Cat extends Animal {
+                // ...
+                public cry() {
+                    System.out.println("Cat cry");
+                }
+            }
+
+            // main
+            Animal animal = new Dog();
+            animal.cry(); // Dog cry, run-time type change is Dog, so cry of Dog is called
+
+            animal = new Cat();
+            animal.cry(); // Cat cry, run-time type is changed to Cat, so cry of Cat is called
+            ```
+5. Fixed problem in **Master to feed animal**
+    ```java
+    // Master
+    class Master {
+        // ...
+
+        // bone to dog
+        public void feed(Dog dog, Bone bone) {
+            System.out.println(bone + "is fed to " + dog);
+        }
+
+        // fish to cat
+        public void feed(Cat cat, Fish fish) {
+            System.out.println(fish + "is fed to " + cat);
+        }
+        // ....
+
+        // ===================
+        // use polymorphism
+
+        public vod feed(Animal animal, Food food) {
+            System.out.println(food + "is fed to " + animal);
+        }
+        // Animal is parent class of Dog, Cat and so on, Food also. So only need declare once, could apply many cases.
+
+        // main
+        Master master = new Master();
+        Food fish = new Fish();
+        Animal cat = new Cat();
+
+        master.feed(cat, fish); // fish is fed to cat.
+        
+    }
+    ```
+6. Notes
+    1. Polymorphism is base on inheritance. Two object exist inheritance relationship.
+    2. Upcasting in polymorphism
+        1. root: a child object to a parent object. A subclass's reference address is assigned to a parent class variable.
+        2. Grammer: ParentClass variableName = new subclass();
+        3. Characteristics:
+            1. When a variable is declared, left of `=` is its compile-time type(never change), right of `=` is its run-time type(can change when running).
+            2. Could call all properties and methods in parent class(obey access rules).
+            3. Can't call subclass special properties and methods.
+                ```java
+                // Animal
+                class Animal{
+                    // ...
+                }
+
+                // Cat
+                class Cat extends Animal{
+                    // ...
+
+                    public void catCatchMouse(){}
+                }
+
+                // main
+                Animal animal = new Cat();
+                animal.catCatchMouse(); // error, compile error. Since compiler think `catCatchMouse` method doesn't exist in Animal class, so will be error, although run-time type is Cat that exist `catCatchMouse` method.
+                ```
+            4. Final run-time type base on implementation of subclass.
+            5. p311
