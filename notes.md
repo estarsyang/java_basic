@@ -1545,6 +1545,7 @@ But, there are many animals and many foods, you can't write a special `feed` to 
 6. Notes
     1. Polymorphism is base on inheritance. Two object exist inheritance relationship.
     2. Upcasting in polymorphism
+        1. Introduction: is the typecasting from a subclass to a superclass(child to parent class). In this way, we can access the properties (methods and variables) of the superclass.
         1. root: a child object to a parent object. A subclass's reference address is assigned to a parent class variable.
         2. Grammer: ParentClass variableName = new subclass();
         3. Characteristics:
@@ -1569,4 +1570,32 @@ But, there are many animals and many foods, you can't write a special `feed` to 
                 animal.catCatchMouse(); // error, compile error. Since compiler think `catCatchMouse` method doesn't exist in Animal class, so will be error, although run-time type is Cat that exist `catCatchMouse` method.
                 ```
             4. Final run-time type base on implementation of subclass.
-            5. p311
+    3. Downcasting in polymorphism
+        1. Introduction: is typecasting from a superclass to a subclass(parent to child class) so that we can access the methods of the subclass.
+        2. Grammer: childClass variableName = (childClass) parentClass's reference.
+        3. Only casting reference, can't not cast object of parent class.
+        4. Parent class reference casting to subclass type.
+            ```java
+            Animal animal = new Cat(); // animal run-time type is a Cat
+            Cat cat = (Cat) animal; // downcasting to Cat, is ok. So it can cast Animal to Cat.
+            Dog dog = (Dog) animial; // error, it can't. Cat and Dog no relationship.
+            ```
+        4. After downcasting, can call all properties and methods of child class.
+            ```java
+            // Animal
+            class Animal{
+                // ...
+            }
+
+            // Cat
+            class Cat extends Animal{
+                // ...
+
+                public void catCatchMouse(){}
+            }
+
+            // main
+            Animal animal = new Cat();
+            Cat cat = (Cat) animal; // downcasting
+            cat.catCatchMouse(); // ok, 
+            ```
