@@ -1599,3 +1599,238 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             Cat cat = (Cat) animal; // downcasting
             cat.catCatchMouse(); // ok, 
             ```
+    4. Properites's value is base on **compile-time type**
+        ```java
+        // Father
+        class Father{
+            int count = 10;
+        }
+
+
+        // Son
+        class Son extends Father {
+            int count = 20;
+        }
+
+        // main
+        Father p1 = new Son(); // the compile-time type of p1 is Father, so its properties is Father's properties.
+        System.out.println(p1.count); // 10;
+        ```
+    5. `instanceOf`
+        1. Introduction: The java instanceof operator is used to test whether the object is an instance of the specified type (class or subclass or interface), test **run-time** type.
+        2. Test:
+            ```java
+            
+            class Father{}
+
+            class Son extends Fahter{}
+
+            // main
+            Son p1 = new Son();
+            System.out.println(p1 instanceof Son); // true
+            
+            Father p2 = new Son();
+            System.out.println(p2 instanceof Father); // true
+            
+            Father p3 = new Son();
+            System.out.println(p3 instanceof Son); // true
+
+            ```
+7. Exercises
+    1. Output
+        ```java
+        // main
+        double d = 13.4; // ok
+        long l = (long) d; // ok
+        System.out.println(l); // 13
+        int in = 5; // ok
+        boolean b = (boolean) in; // error, int to boolean
+        Object obj = "hello"; // ok, upcasting
+        String objStr = (String) obj; // ok, downcasting
+        System.out.println(objStr); // hello
+        Object objPri = new Integer(5); // ok, upcasting
+        String str = (String) objPri; // error, int to string
+        Integer str1 = (Integer) objPri; // ok, downcast
+        ```
+    2. Output
+        ```java
+        class Base {
+            int count = 10;
+            public void display(){
+                System.out.println(this.count);
+            }
+        }
+
+        class Sub extends Base {
+            int count = 20;
+            public void display(){
+                System.out.println(this.count);
+            }
+        }
+
+        // main
+        Sub s = new Sub();
+        System.out.println(s.count); // 20
+        s.display(); // 20
+        
+        Base b = s; // upcast
+        System.out.println(b == s); // true
+        System.out.println(b.count); // 10
+        b.display(); // 20
+
+        ```
+7. **Dynamic Binding(Important)**
+    1. Introduction: Dynamic binding or runtime polymorphism allows the JVM to decide the method's functionality at **runtime**
+    2. rules
+        1. Call methods, binding runtime object.
+        2. Call properties, no binding, the value of properties base on in which class.
+            ```java
+            // father
+            class Father {
+                int i = 10;
+
+                public int getI() {
+                    return i;
+                }
+                public int sum() {
+                    return getI() + 10;
+                }
+                public int sum1() {
+                    return i + 10;
+                }
+            }
+
+            class Son extends Father {
+                int i = 20;
+
+                public int getI() {
+                    return i;
+                }
+                public int sum() {
+                    return getI() + 20;
+                }
+                public int sum1() {
+                    return i + 10;
+                }
+            }
+
+            // main
+            // all is in Son not limit Father
+            Father p1 = new Son();
+            System.out.println(p1.sum()); // 20 + 20 = 40
+            System.out.println(p1.sum1()); // 20 + 10 = 30
+            ```
+            but if modified Son, Annotate `sum` and `sum1`
+            ```java
+            // father
+            class Father {
+                int i = 10;
+
+                public int getI() {
+                    return i;
+                }
+                public int sum() {
+                    return getI() + 10;
+                }
+                public int sum1() {
+                    return i + 10;
+                }
+            }
+
+            class Son extends Father {
+                int i = 20;
+
+                public int getI() {
+                    return i;
+                }
+                /*
+                public int sum() {
+                    return getI() + 20;
+                }
+                public int sum1() {
+                    return i + 10;
+                }
+                */
+            }
+
+            // main
+            // not Son but also Father
+            Father p1 = new Son();
+            System.out.println(p1.sum()); // 20 + 10 = 30
+            // p1.sum method is extended by Father, so focus on Father. sum method return getI() + 10; Since p1's run-time is Son and getI method exist in class Son, so getI is call in Son and return 20(the value of i in Son is 20), and final result is 20 + 10 = 30.
+
+            System.out.println(p1.sum1()); // 10 + 10 = 20
+            // p1.sum1 method is extended by Father, so focus on Father, sum1 method return i + 10; Since the scope is in class Father now, so i is 10, and return 10 + 10 = 20.
+            ```
+8. Applied in Polymorphism
+    1. Polymorphism Array
+        1. Introduction: the data type is parent class, and item is subclass.
+        2. Example: 
+            1. create one `Person` object, two `Student` objects and two `Teacher` objects, store in an array and call `say` method in each object. properties have `name` and `age`. `Student` has `score`, `Teacher` has `salary`. (store in `ployarr_` package which in `/chapter8 object oriented(medium)/packageControl/src/com/edu/poly_/polyarr_`)
+            2. `Teacher` has `teach` method, `Student` has `study` method. also need to call.
+                ```java
+                // Person
+                class Person {
+                    private String name;
+                    private int age;
+                    // ...
+                }
+
+                // Student
+                class Student extends Person {
+                    private double score;
+
+                    // constructor
+                    public Student(String name, int age, double score) {
+                        super(name, age);
+                        this.score = score;
+                    }
+
+                    @Override
+                    public String say() {
+                        return super.say() + "score = " + score;
+                    }
+
+                    // study
+                    public void study(){}
+                    // ...
+                }
+
+                // Teacher
+                public class Teacher extends Person {
+                    private double salary;
+
+                    public Teacher(String name, int age, double salary) {
+                        super(name, age);
+                        this.salary = salary;
+                    }
+
+                    @Override
+                    public String say() {
+                        return super.say() + "salary = " + salary;
+                    }
+
+                    // teach
+                    public void teach(){}
+                }
+
+                // main
+                Person[] persons = new Person[5];
+                persons[0] = new Person("smith",1);
+                persons[1] = new Student("bob",21,20);
+                persons[2] = new Student("linda",11,32);
+                persons[3] = new Teacher("Thomas",30,2000);
+                persons[4] = new Teacher("lucy",33,2300);
+
+                for (int i = 0; i < persons.length; i++) {
+                    Person p = persons[i];
+                    System.out.println(p.say());
+
+                    if (p instanceof Student) { // downcasting to instance of student
+                        ((Student) p).study();
+                    } else if (p instanceof Teacher) {// downcasting to instance of teacher
+                        ((Teacher) p).teach();
+                    }
+                }
+                
+                ```
