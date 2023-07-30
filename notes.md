@@ -1141,20 +1141,19 @@ setting base rules prevent StackOverflowError
 
 ## IntelliJ ide
 1. shortcut(macos)
-    1. Delete line: command + detele
-    2. Duplicate line: command + d
-    3. Code completion: control + space
-    4. Comments: command+ + /
-    5. import utils in current line: option + enter
-    6. Format code: option + command + l
-    7. Quick run code: command + r
-    8. Generate constructor: option + enter or command + n
-    9. Show the hierarchy of class: control + h
-    10. Quick find function in current position: command + b
+    1. Delete line: `command + detele`
+    2. Duplicate line: `command + d`
+    3. Code completion: `control + space`
+    4. Comments: `command+ + /`
+    5. import utils in current line: `option + enter`
+    6. Format code: `option + command + l`
+    7. Quick run code: `command + r`
+    8. Generate constructor: `option + enter or command + n`
+    9. Show the hierarchy of class: `control + h`
+    10. Quick find function in current position: `command + b`
     11. Auto assign variables name: the end of line add `.var`
-    12. Clost other code tab: command + w
-    13. Switch code tab: control + left or control + right
-
+    12. Clost other code tab: `command + w`
+    13. Switch code tab: `control + left or control + right`
 ## Package
 1. Introduction: used to group related class, avoid name conflictes and write a better maintainable code.
 2. Grammer: `package` packageName, `package com.test`
@@ -1834,3 +1833,50 @@ But, there are many animals and many foods, you can't write a special `feed` to 
                 }
                 
                 ```
+    2. Parametric polymorphism
+        1. Introduction: a programming language technique that enables the **generic definition of functions and types**, without a great deal of concern for type-based errors. Formal arguments could be parent class, but actual arguments allow to be child class.
+        2. Example:
+            1. Definite `Employee`, including `name` and `salary`(private), also including `getAnnual` method. Worker and manager inherit `Employee`, manager has `bonus` property and `manage` method. Staff has `work` method. Worker and manager need to override `getAnnual` method.
+            2. Test class add one methods named `showEmpAnnual(Employee e)` to get one employee's annual salary, and call this method in main function.
+            3. Test class add one methods name `testWork`, if pass one worker, call `work` method. if pass one manager, call `manage` method.
+        3. Implement code
+            ```java
+            // chapter8 object oriented(medium)/packageControl/src/com/edu/poly_/polyparameter_
+            ```
+## Object introduction
+
+1. Methods
+    1. equals
+        1. `==` vs `equals`:
+            - `==` is a java operator(can't be override), generally to compare primitive data type but can also be used to compare objects.
+            - `==` compare the data for primitive data types and address for objects.
+            - `equals` compare objects but can't compare primitive.
+            - compare String object, `equals` compares them character by character as well if the memory location equality fails. `==` compare address
+            - `==` compares two variables are not the same data type will throw a compile error but `equals` return `false`.
+            - **case**
+                ```java
+                128 == 128; // false
+                127 == 127; // true.
+                // why?
+                // Autoboxing caches -128 to 127, because the Integer type interns the values (by the static class IntegerCache) from -128 to 127. When u call `valueOf`, the Integer class checks whether value is in the cache or not.
+                ```
+            - Conclusion    
+                A simple rule to remember when dealing with objects is use `equals` if you want to check if the two objects are "equal", use == when you want to see if they point to the same instance.
+    2. finalize
+    3. getClass
+    4. hashCode
+    5. toString
+    6. ...
+
+## Debugger
+    1. Short cut
+        1. F7: Step Into, into a method
+        2. F8: Step Over, step over a method, not into method.
+        3. Shift + F8: Step Out, step out a method.
+        4. option + command + r:Resume, step to next break point.
+        5. option + shift + F7: Force Step into, force into a method, Debugger usually don't step into a java library's method. if you want debugger the method, using force step into.
+
+## Exercise Project
+    1. SmallChangeSys.java: record money. money input, money ouput, detail, exit system.
+        1. Procedure oriented (chapter8 object oriented(medium)/packageControl/src/com/edu/smallchange/SmallChangeSys.java)
+        2. Obejct oriented (chapter8 object oriented(medium)/packageControl/src/com/edu/smallchange/oop)
