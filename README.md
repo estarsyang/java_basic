@@ -3,7 +3,7 @@ This is a basic java notes. inorder to be a entry-level java programmer.
 
 ## JDK, JRE, JVM
 1. JDK(Java Development Kit, Java develop tool packages) = JRE + develop tools(javac, java compile tools, etc.)
-2. JRE(Java Runtime Environment, Java 运行环境) = JVM + Java SE standard library(core library)
+2. JRE(Java Runtime Environment, Java running environment) = JVM + Java SE standard library(core library)
 3. JVM(Java Virtual Machine Java) one virtual machine to run Java  bytecode。
 
 ## Escape Character
@@ -35,68 +35,61 @@ javadoc -d output path -xx -yy xx.java output a java file的document comment.
 
 
 # Chapter 3 variable
-## 一、变量
-1. 变量: 表示内存中的一个存储区域，不同变量，类型不同，占用空间大小不同
-2. 该区域有自己的名称和类型
-3. 变量必须先声明再使用
-4. 该区域的数据可以在同一类型范围内不断变化
-5. 变量在同一作用域内不能重名
-6. 变量 = 数据类型 + 变量名 + 变量值
+## Variable
+1. Variable: Variables are containers for storing data values，different variables have different size in momery.
 
-## 二、数据类型
-1. 基本数据类型
-    1. 数值型
-        1. 整数类型，存放整数(byte[1],short[2],int[4],long[8])
-        2. 浮点(小数)类型(float[4],double[8])
-    2. 字符串 char[2], 存放单个字符 'a
-    3. 布尔型 boolean[1], 存放true, false
-2. 引用数据类型
-    1. 类(class)
-    2. 接口(interface)
-    3. 数组([])
 
-3. 整数的类型
-    1. 整数的空间大小
-        |类型|占用存储空间|范围|
+## Data types
+1. Primitive
+    1. Number
+        1. Int data type，store int number(byte[1],short[2],int[4],long[8])
+        2. Float(decimal)data type(float[4],double[8])
+    2. String data type, char[2], store single character, like 'a', 'b', 'c', ...
+    3. Boolean data type, boolean[1], store true and false
+2. Non-primitive(reference data type)
+    1. class
+    2. Interface
+    3. Arrays, like []
+    4. String
+
+3. Int data type
+    1. Size in momery
+        |type|size|range|
         |----|----|----|
-        |byte[字节]|1|-128~127|
-        |short[短整型]|2|-32768~32767|
-        |int[整型]|4|-2147483648~2147483647|
-        |long[长整形]|8||
-    2. 整数的细节
-        1. 各整数类型有固定范围和长度，不受os影响
-        2. 整数变量默认为int，声明long型常量需要在后面加"L"或者"l"
+        |byte|1|-128~127|
+        |short|2|-32768~32767|
+        |int|4|-2147483648~2147483647|
+        |long|8||
+    2. Detail of int data type
+        1. Fix size and range, not affect by os.
+        2. Int number default is int, define a long variable need to add `L` or `l` at the end of number.
         ```java
           int n1 = 1;
           int n2 = 1l; // error, long can't store in int
-          long n3 = 1l;
+          long n3 = 1l; // define long variable, add l or L at the end.
         ```
-        3. 常用int声明，不足采用long, 尽量使用小的类型，保小不保大。
-        4. bit: 计算机中最小的存储单位，byte：计算机中基本存储单元，1 byte = 8 bit。
-> 20230622
-4. 浮点数
-    1. 分类
-        |类型|占用存储空间|范围|
+        3. Define usually using int, if `int` can't be enough, using `long`.
+        4. bit: smallest size in momery，byte：basic store unit in momery, 1 byte is equal to 8 bits。
+4. Float number
+    1. type
+        |type|size in momery|range|
         |----|----|----|
-        |单精度float|4|-3.403e38~3.403e38|
-        |双精度double|8|-1.798e308~1.798e308|
-
-        - 浮点数在机器中存放形式的简单说明，浮点数 = 符号位+指数位+尾数位
-        - 尾数部分可能丢失，造成精度损失。
-    2. 细节
-        1. 有固定范围和长度，不受具体os影响。
-        2. 默认为double型，声明float通常加"f"或者"F"
-        3. 通常两种表示形式
-            1. 十进制: 5.12 512.0f .512
-            2. 科学计数法: 5.12e2 ==>> 5.12 * 10的2次方 5.12E-2 ==>> 5.12 / 10的2次方
-        4. 通常情况下使用double，比float精确。
+        |float|4|-3.403e38~3.403e38|
+        |double|8|-1.798e308~1.798e308|
+    2. Detail
+        1. Fix size and range, not affect by os.
+        2. Default float number is `double`, define a `float` variable need to add `f` or `F` at the end of number.
+        3. Two representations
+            1. Decimal: 5.12 512.0f .512
+            2. scientific notation: 5.12e2 ==>> 5.12 * (10 to the power of 2), 5.12E-2 ==>> 5.12 / (10 to the power of 2)
+        4. Usually use `double`, `double` is more precision than `float`.
             ```java
             double num1 = 2.1234567851; // output； 2.1234567851, not loss
             float num2 = 2.1234567851F; // output: 2.1234567, loss some decimal, 851
             float num3 = 1.1; // error, double assign to float;
             double num4 = 1.1f; // ok, float transform to double;
             ```
-        5. 浮点数使用陷阱
+        5. Trap in using float number
             ```java
             // 2.7 vs 8.1/3
             double num1 = 2.7; // output: 2.7
