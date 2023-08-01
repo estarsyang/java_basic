@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2023-08-01T09:45:41.384Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="4vMUmqNu6b_M-QliSUWE" version="21.6.6" type="device">
+  <diagram name="第 1 页" id="fU0ziWKYUCV0oJwHhF5h">
+    <mxGraphModel dx="954" dy="484" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-1" target="ZIl-DLGagUA5SgzqsHXp-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-1" value="HouseRentApp.java&lt;br&gt;Main(){&lt;br&gt;// create House object&lt;br&gt;// call house object, show menu&lt;br&gt;}" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="60" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-2" target="ZIl-DLGagUA5SgzqsHXp-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-2" value="HouseView.java&lt;br&gt;1. show view&lt;br&gt;2. receive user input&lt;br&gt;3. call HouseService to operate house" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="190" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-3" target="F_cEiywAD_HL9K0ypTfS-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-3" value="HouseService.java&lt;br&gt;1. respond HouseView operation&lt;br&gt;2. modify house information(curd)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="300" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-1" value="House.java&lt;br&gt;1.a house object represent a house information" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="248" y="455" width="142" height="105" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

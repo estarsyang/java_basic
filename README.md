@@ -1873,3 +1873,50 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     1. SmallChangeSys.java: record money. money input, money ouput, detail, exit system.
         1. Procedure oriented (chapter8 object oriented(medium)/packageControl/src/com/edu/smallchange/SmallChangeSys.java)
         2. Obejct oriented (chapter8 object oriented(medium)/packageControl/src/com/edu/smallchange/oop)
+
+# Chapter9 Project- house renting sysytem.
+
+## Project Introduction:
+1. Main menu
+    1. add house
+    2. find house
+    3. remove house
+    4. modify house msg
+    5. house list
+    6. exit
+2. Add house
+    1. house owner: String
+    2. telephone: Number
+    3. address: String
+    4. rent: Number
+    5. status: rent out or unleased, String
+3. Find house
+    1. Introduction: input the house id,if id exist, show the detail. otherwise, show no exist msg.
+4. Remove house
+    1. Introduction: input the house id, if id exist, show the remove confirm, "Y/N", Y, remove, N, do remove, 
+    go back main menu. if id not exist, show msg id doesn't exist, please input again. if input id is -1, directly exit, go back main menu.
+5. Modify house:
+    1. Introduction: input the house id, if id not exist, show msg id doesn't exist, if input id is -1, directly exit, go back main menu. if id exist, show the detial of id. And then can directly input new value of each item.
+    for example:
+        ```java
+        // the detial of house after input id in modify operation;
+        // name(bob): tom
+        // telephone(123): 116
+        // ...
+        ```
+    if customer doesn't want to modify this item, directly Enter
+6. House list
+    1. Introduction: show house list. columns including id, name, telephone, address, rent, status(rent out/ unleased)
+7. Exit
+    1. Introduction: When customer input exit command, confirm,(Y/N). if input is Y, exit. if input is N, go back main menu. Other input show input error, please input again.
+
+## Project design
+
+1. Architecture
+    1. Layered Architecture(Multi-tier Architecture)
+2. Architecture Frame
+    1. Contents
+        1. System has which classes(file)
+        2. Declare calling relationship between classes.
+    2. detial
+    ![Frame](/images/chapter9%20house%20renting%20frame.png)
