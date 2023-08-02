@@ -1886,10 +1886,10 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     6. exit
 2. Add house
     1. house owner: String
-    2. telephone: Number
+    2. phone: String
     3. address: String
     4. rent: Number
-    5. status: rent out or unleased, String
+    5. status: rent out or not rent, String
 3. Find house
     1. Introduction: input the house id,if id exist, show the detail. otherwise, show no exist msg.
 4. Remove house
@@ -1909,6 +1909,9 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     1. Introduction: show house list. columns including id, name, telephone, address, rent, status(rent out/ unleased)
 7. Exit
     1. Introduction: When customer input exit command, confirm,(Y/N). if input is Y, exit. if input is N, go back main menu. Other input show input error, please input again.
+8. Tips
+    1. Using array as a database, not consider array resize, fix array length, set a default length.
+    2. Do basic data verify.
 
 ## Project design
 
@@ -1920,3 +1923,44 @@ But, there are many animals and many foods, you can't write a special `feed` to 
         2. Declare calling relationship between classes.
     2. detial
     ![Frame](/images/chapter9%20house%20renting%20frame.png)
+        - HouseRentApp: to create house object, call house object, show main menu
+        - HouseView: show main menu view, receive user input commands, call api from HouserService to operate House object
+        - HouseService: do business, including crud.
+        - House: model layer, a house object data structure. Modified by HouseService.  
+    3. each layer create one package. Although there are one files, there will be more files in the future.
+3. Import team `Utility` class.
+4. Project function implementation steps
+    1. which function.
+    2. Analyse
+    3. Coding
+5. Model layer implementation - `House` class in House.java.
+    1. Properties
+        1. id
+        2. name
+        3. phone
+        4. address
+        5. rent
+        6. state
+    2. Constructure, get and set
+    3. toString override.
+6. Show main menu and exit function.
+    1. Show main menu - `view layer`, `mainMenu` method in `HouseView.java`.
+    2. exit - also in `mainMenu` method.
+7. House list
+    1. list - `view layer`, show all houses, `listHouse` method in `HouseView.java`.
+    2. return all houses information - `service layer`, `list` method in `HouseService.java`.
+    3. store houses information - `service layer`, base on array, defint `House[]` to store house object, in `HouseService.java`
+8. Add house
+    1. add house view - `view layer`, `addHouse` method, in `HouseView.java`.
+    2. add house operation - `service layer`, `add` method, in `HouseService.java`
+9. Delete house
+    1. delete house view - `view layer`, `delHouse` method in `HouseView.java`.
+    2. delete house operation- `service layer`, `detele` method, in `HouseService.java`
+10. Exit
+    1. exit - `view layer`, `exit` method in `HouseView.java`.
+11. Find house:
+    1. findHouse: `view layer`, `findHouse` method in `HouseView.java`.
+    2. findById: `service layer`, `findById` method in `HouseService.java`
+12. Update house:
+    1. updateHouse: `view layer`, `updateHouse` method in `HouseView.java`.
+13. `HouseRentApp` is the main input of the app.

@@ -1,29 +1,88 @@
-<mxfile host="app.diagrams.net" modified="2023-08-01T09:45:41.384Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="4vMUmqNu6b_M-QliSUWE" version="21.6.6" type="device">
+<mxfile host="app.diagrams.net" modified="2023-08-02T09:33:21.780Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="TIQMm9K62dQ3W5ErES2N" version="21.6.6" type="device">
   <diagram name="第 1 页" id="fU0ziWKYUCV0oJwHhF5h">
-    <mxGraphModel dx="954" dy="484" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="765" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="F_cEiywAD_HL9K0ypTfS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-1" target="ZIl-DLGagUA5SgzqsHXp-2">
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;align=left;" parent="1" source="ZIl-DLGagUA5SgzqsHXp-1" target="ZIl-DLGagUA5SgzqsHXp-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="140" />
+              <mxPoint x="261" y="140" />
+              <mxPoint x="261" y="120" />
+              <mxPoint x="381" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-12" value="call" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F_cEiywAD_HL9K0ypTfS-2">
+          <mxGeometry x="-0.3289" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-1" value="HouseRentApp.java&lt;br&gt;Main(){&lt;br&gt;// create House object&lt;br&gt;// call house object, show menu&lt;br&gt;}" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+          <mxGeometry x="70" y="30" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;align=left;" parent="1" source="ZIl-DLGagUA5SgzqsHXp-2" target="ZIl-DLGagUA5SgzqsHXp-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ZIl-DLGagUA5SgzqsHXp-1" value="HouseRentApp.java&lt;br&gt;Main(){&lt;br&gt;// create House object&lt;br&gt;// call house object, show menu&lt;br&gt;}" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="250" y="60" width="140" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="F_cEiywAD_HL9K0ypTfS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-2" target="ZIl-DLGagUA5SgzqsHXp-3">
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;align=left;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-2" target="PJFjo10bSRxdp4YXXQQ2-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ZIl-DLGagUA5SgzqsHXp-2" value="HouseView.java&lt;br&gt;1. show view&lt;br&gt;2. receive user input&lt;br&gt;3. call HouseService to operate house" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="250" y="190" width="140" height="90" as="geometry" />
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-10" value="coding" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PJFjo10bSRxdp4YXXQQ2-6">
+          <mxGeometry x="0.0216" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="F_cEiywAD_HL9K0ypTfS-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-3" target="F_cEiywAD_HL9K0ypTfS-1">
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-2" target="PJFjo10bSRxdp4YXXQQ2-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ZIl-DLGagUA5SgzqsHXp-3" value="HouseService.java&lt;br&gt;1. respond HouseView operation&lt;br&gt;2. modify house information(curd)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="250" y="300" width="140" height="120" as="geometry" />
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-18" value="call" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PJFjo10bSRxdp4YXXQQ2-15">
+          <mxGeometry x="-0.3566" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="F_cEiywAD_HL9K0ypTfS-1" value="House.java&lt;br&gt;1.a house object represent a house information" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="248" y="455" width="142" height="105" as="geometry" />
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-2" value="HouseView.java (view layer)&lt;br&gt;1. show view&lt;br&gt;2. receive user input&lt;br&gt;3. call HouseService to operate house" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+          <mxGeometry x="311" y="140" width="199" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;align=left;" parent="1" source="ZIl-DLGagUA5SgzqsHXp-3" target="F_cEiywAD_HL9K0ypTfS-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;align=left;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-3" target="PJFjo10bSRxdp4YXXQQ2-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-11" value="coding" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PJFjo10bSRxdp4YXXQQ2-8">
+          <mxGeometry x="-0.0667" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="ZIl-DLGagUA5SgzqsHXp-3" target="PJFjo10bSRxdp4YXXQQ2-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-17" value="call" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PJFjo10bSRxdp4YXXQQ2-16">
+          <mxGeometry x="0.1773" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZIl-DLGagUA5SgzqsHXp-3" value="HouseService.java (business layer)&lt;br&gt;store house information. using array as a database in this project: House[].&lt;br&gt;1. respond HouseView operation&lt;br&gt;2. modify house information(curd)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+          <mxGeometry x="311" y="260" width="199" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="F_cEiywAD_HL9K0ypTfS-1" value="House.java (domain/model/data layer)&lt;br&gt;1.a house object represent a house information" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;" parent="1" vertex="1">
+          <mxGeometry x="310" y="460" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-1" value="Utility&lt;br&gt;all tools to support developement." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;" vertex="1" parent="1">
+          <mxGeometry x="70" y="285" width="100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;align=left;" edge="1" parent="1" source="PJFjo10bSRxdp4YXXQQ2-2" target="PJFjo10bSRxdp4YXXQQ2-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-2" value="1. mainMenu: show menu&lt;br&gt;2. listHouse: all houses objects, and show them&lt;br&gt;3. addHouse: view, tips, call Service add method to add.&lt;br&gt;4. delHouse: view, tips, call Service delete method to delete.&lt;br&gt;5. findHouse: view, tips, call Service findById method to get house, and show house.&lt;br&gt;6.updateHouse: view, tips, call Service findById to get house, and update house information" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
+          <mxGeometry x="690" y="120" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-5" value="coding" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="770" y="68" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PJFjo10bSRxdp4YXXQQ2-7" value="1. list: return all houses objects&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;2.add: add a new house object to database&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;3.delete: delete a house and update database&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;4. findById: find a house by house id, and return the house object.if not exist, return null.&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
+          <mxGeometry x="690" y="425" width="220" height="210" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
