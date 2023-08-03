@@ -1964,3 +1964,203 @@ But, there are many animals and many foods, you can't write a special `feed` to 
 12. Update house:
     1. updateHouse: `view layer`, `updateHouse` method in `HouseView.java`.
 13. `HouseRentApp` is the main input of the app.
+
+# Chapter10 Obejct oriented(High)
+
+## Class variable / static variable
+
+1. Question: Many children play the game, and other children keep joining the game, how many children play the game?
+    Basic previous study, we can define a varable name `count` to count the children number. like below coding...
+
+        ```java
+        class Children {
+            private String name;
+            // ...
+            public void join(){
+                // join the game..
+            }
+        }
+
+        // main
+        int count = 0;
+
+        Children child1 =  new Children();
+        child1.join();
+        count++;
+        
+        Children child2 =  new Children();
+        child2.join();
+        count++;
+
+        // ...
+        ```
+    Above code seems that solve the question, but it is not good. Since
+    1. Varable `count` is independent of any object.
+    2. Access `count` is troublesome, not use oop
+
+    Base on these problems, we need to use **class variable** or **static varibale**. The feature of the variable is shared by all instances of class.
+
+    ```java
+        class Children {
+            private String name;
+            // add class variable / static variable
+            public static int count = 0;
+
+            public void join(){
+                // join the game..
+            }
+
+            // main 
+            Children child1 =  new Children();
+            child1.join();
+            child1.count++;
+            
+            Children child2 =  new Children();
+            child2.join();
+            child2.count++;
+
+            // ...
+        }
+    ```
+2. Introduciton: The static variable can be used to refer to the common property of all objects (which is not unique for each object). Anyone object of class to access the variable will return the same value, and anyone object to modify the variable will modify the same variable.
+3. Grammar: 
+    ```java
+    // access modify + static + data type + variable name (recommend)
+    public static int count;
+
+    // or
+    // static + access modify + data type + variable name
+    static public int count;
+    ```
+4. Access static variable
+    ```java
+    // className.variable (recommend)
+    Child.count;
+    // ObjectName.variable
+    child1.count
+    ```
+    1. example
+        ```java
+        // main
+        System.out.println(A.name);
+
+        // obejct.variable
+        A a = new A();
+        System.out.println(a.name);
+
+        // class A
+        class A{
+            public static String name = "tom";
+        }
+        ```
+5. Detail
+    1. When to use: A variable need to common use.
+    2. Different with non-static variable: static variable could be shared by all object of same class but non-static variable only could be use by its object.
+    3. Static variable is initial when import class. Although don't new a object, you can use static variable.
+    4. Lifecycle of static class start with class import, end with class recycle.
+## Class method / static method.
+
+1. Introduction
+    1. A static method in Java is a method that is part of a class rather than an instance of that class.
+    2. Every instance of a class has access to the method.
+    3. Static methods have access to class variables (static variables) without using the class’s object (instance).
+    4. Only static data may be accessed by a static method. It is unable to access data that is not static (instance variables).
+    5. In both static and non-static methods, static methods can be accessed directly.
+2. Program
+    ```java
+    // access modify + static + dataType + variableName (recommend)
+    public static int test(){}
+
+    // static + access modify + dataType + variableName
+    public static int test(){}
+    ```
+3. Call static method
+    ```java
+    // className.staticMethod
+    A.test();
+    // or
+    // ObjectName.staticMethod
+    a.test();
+    ```
+4. Application scenario (Utils)     
+    When a method don't hava any properties and methods of a class, the method usually to be a static method. like util library, `Math`, `Array`and so on.
+    ```java
+    class MyTool {
+        public static int sum(double n1, double n2){
+            return n1 + n2;
+        }
+    }
+    ```
+5. Notes:
+    1. No `this` or `super` keywork in static method.
+        ```java
+        public static void test(){
+            super.xxx // error
+            this.xx // error
+            
+        }
+        ```
+    2. Could be call by class or object.
+    3. Call non-static method need to use object, can't directly use class to call.
+    4. Static method can only access static variables or methods.
+    5. Non-static method can access non-static variable or method and static variable or method.
+    6. Static can only access static, non-static can access static and non-static.
+
+## Main method
+
+1. Notes
+    1. Who call main? JVM call `main` method, so main method must be public.
+    2. JVM call `main` method no need to create object, so this method must be static.
+    3. `main` method receive String formal arguments
+    4. java java.file argument1 argument2 ....
+        ```java
+        // terminal
+        java test a b c
+
+        // main
+        public static void main(String[] args){
+            args[0]; // a
+            args[1]; // b
+            // ...
+        }
+        ```
+    5. `main` is a static method, can access static properties and methods, but can't access non-static properties and methods. Must create a object to access.
+
+## Code block
+
+1. Introduction: code block also name intial block, belong to class member(part of class), it's the same as method, using `{}` to encase logic statment. But it's different to method, it doesn't have name, return value, arguments, only have method body. And it can't be called directly. When a class import or create a object, it will be called.
+2. Grammar
+    ```java
+    [modifier]{
+        // coding
+    };
+
+    // example
+    static {
+        System.out.println("hello world");
+    }
+    ```
+3. Notes:
+    1. modifier: only `static` or none.
+    2. Executation is preferred over construction.
+    3. Code block could be a complement of constuction.
+    4. Static code block is used to initialize class, will be called in **import class**, only **once**. non-static code block will be executed in creating object every time.
+    5. When os import a class?
+        1. `new` operation
+        2. Create subclass object, parent class will be imported.
+        3. Using static member of class, class will be imported. Using `Cat.age` will lead to import `Cat` class, class import will be executed static code block.
+            ```java
+            class Cat {
+                public static int age = 10;
+
+                static{
+                    System.out.println("123");
+                }
+            }
+
+            // main
+            System.out.println(Cat.age);
+            // 123
+            // 10
+            ```
+    6. Using static member of class, non-static code block will be not executed. Non-static code block will only be executed in creating object.
