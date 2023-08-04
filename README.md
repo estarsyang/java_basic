@@ -2164,3 +2164,84 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             // 10
             ```
     6. Using static member of class, non-static code block will be not executed. Non-static code block will only be executed in creating object.
+
+## Design Patterns
+
+1. Singleton Pattern
+    1. Introduction: This pattern involves a single class which is responsible to create an object while making sure that only single object gets created. This class provides a way to access its only object which can be accessed directly without need to instantiate the object of the class.
+    2. How to do a singleton pattern?
+        1. Method 1 - directly assign the instance to variable(may cause use memory but not work).
+            1. private constructor.
+            2. Create the class object in class. Using static to define the object.
+            3. Define a static method which return the object. And export it.
+                ```java
+                // gf
+                class GirlFriend {
+                    private String name;
+                    private static GirlFriend gf = new GirlFriend(); // create the object of class.
+
+                    private void GirlFriend(String name){
+                        this.name = name;
+                    }
+                    // ...
+                    public static GirlFriend getInstance() {
+                        return gf;
+                    }
+                }
+
+                // main
+                GirlFriend tom = GirlFriend.getInstance();
+                ```
+        2. Method 2 - lazy create, when use the method, create and assign it to variable(may cause thread safety problem).
+            1. private constructor.
+            2. Create the class object and assgin `null`;
+            3. Define a static method and method check if the object is equal to `null`, assign a new instance of class to it. Finally, return instance.
+                ```java
+                // gf
+                class GirlFriend {
+                    private String name;
+                    private static GirlFriend gf = null; // create the object of class.
+
+                    private void GirlFriend(String name){
+                        this.name = name;
+                    }
+                    // ...
+                    public static GirlFriend getInstance() {
+                        if(gf == null) {
+                            gf = new GirlFriend("tom");
+                        }
+                        return gf;
+                    }
+                }
+
+                // main
+                GirlFriend tom = GirlFriend.getInstance();
+                ```
+            
+## `final` keyword
+
+1. Introduction: to restrict the user. It can be used in variable, method, class. It can be initialized in the constructor only.
+2. Cases
+    1. `final` a class and this class can't be inherted.
+        ```java
+        final class A{}
+        class B extends A {} // error, can't be extended.
+        ```
+    2. `final` a method and this method can't be override, overload.
+         ```java
+        class A{
+            public final void hi(){}
+        }
+        class B extends A {
+            @Override
+            public final void hi(){} // error, can't be override.
+        } 
+        ```
+    3. `final` a property in class and this property can't be modified.
+    4. `final` a variable and this variable can't be changed.
+
+3. Grammar
+    1. class: `final class Xxxx{}`
+    2. method: `accessModifier + final + return dataType + methodName`
+    3. property/variable: `accessModifier + final + dataType + variableName + = initial value`
+p395
