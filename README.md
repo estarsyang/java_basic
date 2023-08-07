@@ -1,5 +1,5 @@
 # Introduction
-This is a basic java notes. inorder to be a entry-level java programmer. 
+This is a basic java notes. inorder to be a entry-level java programmer. [Video link](https://www.bilibili.com/video/BV1fh411y7R8/?spm_id_from=333.999.0.0&vd_source=d71377f649cfc8d319aa45ec353a83f5)
 
 ## JDK, JRE, JVM
 1. JDK(Java Development Kit, Java develop tool packages) = JRE + develop tools(javac, java compile tools, etc.)
@@ -2301,7 +2301,7 @@ But, there are many animals and many foods, you can't write a special `feed` to 
 
 1. Introduction: An abstract class is a class that is declared abstract—it may or may not include abstract methods. Abstract classes cannot be instantiated, but they can be subclassed. An abstract method is a method that is declared without an implementation (without braces, and followed by a semicolon).
 2. Notes
-    1. abstract class is also a class, it can have properties, static modify, methods and so on.
+    1. abstract class is also a class, it can have properties, `static` modify, methods and so on.
         ```java
         abstract class AA {
             public int age;
@@ -2357,3 +2357,116 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             }
         }
         ```
+
+## Interface
+
+1. Introduction: An interface is a reference type in Java. It is similar to class. It is a collection of abstract methods. A class implements an interface, thereby inheriting the abstract methods of the interface. Along with abstract methods, an interface may also contain constants, default methods, static methods, and nested types.
+    1. Abstract methods.
+    2. Collection of abstract methods.
+    3. Class implements interface.
+    4. Contain constants, `default` methods, `static` methods, and nested types.
+        ```java
+        public interface TestInter {
+            public int n1 = 10;
+
+            public void hi();
+
+            public default hello() {
+                System.out.println("hello");
+            }
+
+            public static sayHi() {
+                System.out.println("hi");
+            }
+        }
+        ```
+    5. Most important, order rules to limit all implementations, all implementations need to obey rules.
+2. Grammar: 
+    ```java
+        interface InterfaceName { 
+            // properties and methods 
+        }
+
+        // class implement
+        class className implements InterfaceName {
+            // self properties
+            // self methods
+            // must implement interface's methods
+        }
+    ```
+3. Notes
+    1. Interface can not be instance.
+    2. All methods in interface are modified by `public`. Abstract methods no need to use `abstract` keyword to declare.
+    3. All methods must be implemented when a class implement an interface. // alt + enter quick short
+    4. Abstract class no request to implement methods of interface.
+    5. One class could implement multiple interfaces.
+        ```java
+        class Pig implements AI, BI {
+            // ...
+        }
+        ```
+    6. All properites of interface are `final`, `public`, `static`.
+        ```java
+        
+        interface IB {
+            int n1 = 10;
+        }
+
+        // main
+        System.out.println(IB.n1); // static
+        IB.n1 = 2; // error, final
+        ```
+    7. Access a property of interface by using `interfaceName.propertyName`, like `IB.n1`.
+    8. Interface can not extend other class, but it can extends multiple interfaces.
+        ```java
+        interface A extends B, C {}
+        ```
+    9. Interface modifier must be `public` or `default`.
+4. Test
+    1. Below coding is correct or not? print output.
+        ```java
+        interface A {
+            int a = 23; // public static final a = 23;
+        }
+        class B implements A {} // A no methods, it's ok.
+
+        // main
+        B b = new B();
+        System.out.println(b.a); // 23
+        System.out.println(A.a); // 23
+        System.out.println(B.a); // 23
+        ```
+5. Implement interface vs extend class
+    1. Interface is a **add** for class, it's a "like-a" relationship.
+    2. Extend class is a "is-a" relationship. Subclass extend super class, it will auto obtain super class's properties and methods.
+        ```java
+        class Monkey {
+            public void climb() {
+                System.out.println("climbing");
+            }
+        }
+
+        interface Ride {
+            public void rideBike();
+        }
+
+        class LitterMonkey extends Monkey implements Ride{
+
+            @Override
+             public void rideBike(){
+                // ....
+             }
+        }
+        
+
+        // main
+        LitterMonkey wuKong = new LitterMonkey();
+        wuKong.climb();
+        wuKong.rideBike();
+        ```
+    3. Conclusion:
+        1. Solve different problems.
+            1. interface: Design rules and lead class to obey and implement. more flexible.
+            2. extend: Solve coding reuseability and maintainability.
+        2. Interface could do more in decoupling.
+410
