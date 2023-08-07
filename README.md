@@ -2244,4 +2244,116 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     1. class: `final class Xxxx{}`
     2. method: `accessModifier + final + return dataType + methodName`
     3. property/variable: `accessModifier + final + dataType + variableName + = initial value`
-p395
+4. Notes:
+    1. `final` modified properties are also called constants, usually use XX_XX_XX to name. Can modify a formal argument in a method(Can not modify the argument in method body)
+        ```java
+        public int list(final int X) {
+            ++X; // error, can not modify.
+            return X + 1;
+        }
+        ```
+    2. `final` modified one properties must assign an initial value. It can be assgin in these positions:
+        1. Define: like `public final double TAX_RATE = 0.08;`
+        2. In construction.
+        3. In code block.
+            ```java
+            class AA {
+                public final int AGE = 10;
+                public final int AGE1;
+                public final int AGE2;
+
+                {
+                    AGE2 = 30;
+                }
+
+                public AA {
+                    AGE1 = 20;
+                }
+            }
+            ```
+    3. If property is static and use `final` to modify, It can be assgined in these positions:
+        1. Define
+        2. static code block.   
+        can't assign value in construction.
+            ```java
+            class AA {
+                public static final int AGE = 10;
+                public static final int AGE1;
+                public static final int AGE2;
+
+                static {
+                    AGE2 = 30;
+                }
+
+                public AA {
+                    AGE1 = 20; // error
+                }
+            }
+            ```
+    4. `final` class can't be inhertited, but it can be instantiated object.
+    5. If class is not `final` class, but it has `final` methods, so this method can't be override, but it can be inherited.
+    6. If a class is `final` class, it's unnecessary to modify methods using `final`.
+    7. `final` can not modify a construction.
+    8. `final` usually modify a property with `static`, high efficient(Since don't import the class of the property).
+    9. Integer, Double, Float, Boolean, String are also `final` class.
+
+## Abstract class, Abstract method
+
+1. Introduction: An abstract class is a class that is declared abstract—it may or may not include abstract methods. Abstract classes cannot be instantiated, but they can be subclassed. An abstract method is a method that is declared without an implementation (without braces, and followed by a semicolon).
+2. Notes
+    1. abstract class is also a class, it can have properties, static modify, methods and so on.
+        ```java
+        abstract class AA {
+            public int age;
+            public static String name = "Tom";
+
+            void call(){
+                // ....
+            }
+
+            public abstract void test();
+            // ...
+        }
+        ```
+    2. If a class extends a abstract class, it must implement all abstract methods, except it is also a abstract class.
+    3. Abstract method can't use `private`, `final`, `static` to modify. Since these keywords are contrary to override. 
+3. Best practics -- template design pattern
+    1. Requirements
+        1. Multiple classes, finish different jobs.
+        2. Get cost time that finish all jobs
+    2. Thinking: define a abstract class `Template`, to finish these functions.
+        1. Define a method `calculateTime`, can calcualte cost time in running which code.
+        2. Define a abstract method `job`.
+        3. Define a subclass, inherit abstract class, and implement code method.
+        4. Define a test class `TestTemplate` to check it.
+    3. Implementation.
+        ```java
+        // abstract class Template
+        abstract class Template {
+            public abstract void job();
+
+            public void calculateTime() {
+                long start = System.currentTimeMillis();
+                job();
+                long end = System.currentTimeMillis();
+                System.out.println("time is" + (start - end));
+            }
+        }
+        // class AA
+        class AA extends Template {
+            // ...
+            @Override
+            public void job() {
+                // ...
+            }
+        }
+
+        // class BB
+        class BB extends Template {
+            // ...
+            @Override
+            public void job() {
+                // ...
+            }
+        }
+        ```
