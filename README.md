@@ -2436,6 +2436,26 @@ But, there are many animals and many foods, you can't write a special `feed` to 
         System.out.println(A.a); // 23
         System.out.println(B.a); // 23
         ```
+    2. Number two.
+        ```java
+        interface A{
+            int x = 0;
+        }
+        class B {
+            int x = 1;
+        }
+        class C extends B implements A {
+            public void pX(){
+                System.out.println(x); // error, x is ambiguous
+                // rewrite
+                System.out.println(A.x + " and " + super.x);
+            }
+
+            public static void main(String[] args){
+                new C().pX();
+            }
+        }
+        ```
 5. Implement interface vs extend class
     1. Interface is a **add** for class, it's a "like-a" relationship.
     2. Extend class is a "is-a" relationship. Subclass extend super class, it will auto obtain super class's properties and methods.
@@ -2469,4 +2489,184 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             1. interface: Design rules and lead class to obey and implement. more flexible.
             2. extend: Solve coding reuseability and maintainability.
         2. Interface could do more in decoupling.
-410
+6. Interface polymorphism
+    1. Introduction: Each interface is considered as a type. An object of a class can be casted to the type of each interface it implements. This is how polymorphism via interfaces work.
+    2. Polymorphism arguments
+        ```java
+        interface Usb {
+            public void start();
+        }
+
+        class Phone implements Usb {
+            public void start(){
+                System.out.println("Phone is start...");
+            }
+        }
+        class Camera implements Usb {
+            public void start(){
+                System.out.println("Camera is start...");
+            }
+        }
+
+        class Computer {
+            public void run(Usb usb) {
+                usb.start();
+            }
+        }
+
+        // main
+        Phone phone = new Phone();
+
+        Camera camera = new Camera();
+
+        Computer computer = new Computer();
+
+        computer.run(phone); // phone is start
+        computer.run(camera); // camera is start
+        ```
+    3. Polymorphism array.
+        ```java
+        interface Usb {}
+
+        class Phone implements Usb {}
+        class Camera implements Usb {}
+
+        // main
+        Usb[] usbs = new Usb[2];
+        Usb[0] = new Phone();
+        Usb[1] = new Camera();
+        ```
+    4. interface extends interface
+        ```java
+        interface IH{}
+        interface IG{}
+        class Teacher implements IG{}
+
+        // main
+        // varaible of interface could be referenced to the instance of class which implement the interface.
+        IG ig = new Teacher(); // class Teacher implement interface IG, so IG variable could be referenced to instance of class Teacher.
+        IH ih = new Teacher(); // error, no relationship.
+
+        //  so, IG need to extends IH.
+        interface IG extends IH{}
+
+        // main
+        IG ig = new Teacher();
+        IH ih = new Teacher(); // ok
+        ```
+
+## Inner class(Nest class)
+1. Introduction: to define a class within another class, such a class is called a nested class, anoter class is called outer class. The most important feature of inner class is directly access private properties, and show the enclosing relationship of class.
+    ```java
+    class Outer {
+        private void n1 = 100;
+        public void m1(){
+            System.out.println("m1()");
+        }
+        {
+            // code block
+        }
+
+        // inner class
+        class Inner {
+            // ....
+        }
+    }
+    ```
+2. Grammar
+    ```java
+    class Outer { // outer class
+
+        class Inner { // inner/nested class
+
+        }
+    }
+    class Other { outer other class, no relationship with inner/nested class
+
+    }
+    ```
+3. Types
+    1. Define inner class in method within a outer class.
+        1. local inner class (exist class name).
+        2. anonymous inner class (no class name!!!!!!!!!!!!).
+    2. Define inne class within a outer class.
+        1. member inner class (no `static` modifier)
+        2. static inner class (use `static` modifier)
+4. Local inner class
+    1. Define inner class in **method** or **code block** within a outer class. it has class name.
+    2. Could access outer class's all members, including private.
+    3. Can not add access modifier, but can use `final` to modify.
+    4. Scope only in method or code block which define the inner class.
+    5. Local inner class can directly access outer class members.
+    6. Outer class could create inner class object in methods, and call inner class's method.
+    7. Outer other class can not access inner class.
+    8. If outer class and inner class have the same name member, follow the principle of **proximity**. if inner class want to access outer class member, using `outerClassName.this.memberName`.
+        ```java
+        class Outer {
+            private int n1 = 100;
+
+            public void m1() {
+                private int n1 = 200;
+                final class Inner {
+                    public void f1() {
+                        // 2. Could access outer class's all members, including private
+                        // 5. Local inner class can directly access outer class members
+                        System.out.println(n1); // 200
+                        // 8. If outer class and inner class have the same name member, follow the principle of **proximity**. if inner class want to access outer class member, using `outerClassName.this.memberName`.
+                        System.out.println("outer class member " + Outer.this.n1); // 100
+
+                        m2();
+                    }
+                }
+                // 6. Outer class could create inner class object in methods, and call inner class's method
+                Inner inner = new Inner();
+                inner.f1();
+            }
+
+            public void m2() {
+                System.out.println("outer m2");
+            }
+        }
+
+        // main
+        Outer outer = new Outer();
+        outer.m1(); // 100 and  outer m2
+
+        // same name member n1 = 100 and n1 = 200;
+        Outer outer = new Outer();
+        outer.m1(); // 200 outer class member 100  outer m2
+        ```
+5. Anonymous inner class (important!!!!!!!!)
+    1. Define in outer class and no class name.
+    2. Grammar
+        ```java
+        new otherClassName/otherInterfaceName(arguments) {
+            class body
+        }
+        ```
+    3. 
+        1. easy to develop, no need to define a class to **extend or implement**. Directly return a instance object.
+            ```java
+            interface IA {
+                public void cry();
+            }
+            
+            // outer class
+            class Outer {
+                public void action() {
+                    IA tiger = new IA(){ // anonymous inner class
+                        @Override
+                        public void cry() {
+                            System.out.println("tiger is crying...");
+                        }
+                    };
+                    tiger.cry();
+                }
+            }
+
+            class Test {
+                // main
+                Outer01 outer01 = new Outer01();
+                outer01.action();
+            }
+            ```
