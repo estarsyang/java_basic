@@ -19,5 +19,36 @@ class Outer01 {
             }
         };
         tiger.cry();
+
+        // anonymous class for class.
+        Father jack = new Father("jack"){
+            @Override
+            public void say() {
+                super.say();
+            }
+        };
+
+        System.out.println(jack.getClass());
+
+        Animal animal = new Animal() {
+            @Override
+            void eat() {
+                System.out.println("animal is eating");
+            }
+        };
+        animal.eat();
     }
+}
+
+class Father {
+    public Father(String name) {
+        System.out.println(name);
+    }
+
+    public void say(){
+        System.out.println("father is saying...");
+    }
+}
+abstract class Animal {
+    abstract void eat();
 }

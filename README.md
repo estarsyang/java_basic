@@ -2245,14 +2245,14 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     2. method: `accessModifier + final + return dataType + methodName`
     3. property/variable: `accessModifier + final + dataType + variableName + = initial value`
 4. Notes:
-    1. `final` modified properties are also called constants, usually use XX_XX_XX to name. Can modify a formal argument in a method(Can not modify the argument in method body)
+    1. `final` modified properties are also called constants, usually use XX_XX_XX to name variable. Can modify a formal argument in a method(Can not modify the argument in method body)
         ```java
         public int list(final int X) {
             ++X; // error, can not modify.
             return X + 1;
         }
         ```
-    2. `final` modified one properties must assign an initial value. It can be assgin in these positions:
+    2. `final` modify one properties must assign an initial value. It can be assgin in these positions:
         1. Define: like `public final double TAX_RATE = 0.08;`
         2. In construction.
         3. In code block.
@@ -2405,11 +2405,10 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             // ...
         }
         ```
-    6. All properites of interface are `final`, `public`, `static`.
+    6. All properites in interface are `final`, `public`, `static`.
         ```java
-        
         interface IB {
-            int n1 = 10;
+            int n1 = 10; // equal to public final static int n1 = 10;
         }
 
         // main
@@ -2586,13 +2585,13 @@ But, there are many animals and many foods, you can't write a special `feed` to 
     }
     ```
 3. Types
-    1. Define inner class in method within a outer class.
-        1. local inner class (exist class name).
-        2. anonymous inner class (no class name!!!!!!!!!!!!).
-    2. Define inne class within a outer class.
-        1. member inner class (no `static` modifier)
-        2. static inner class (use `static` modifier)
-4. Local inner class
+    1. Define inner class in method or code block within a outer class.
+        1. Method Local Inner Classes  (exist class name).
+        2. Anonymous Inner Class (no class name!!!!!!!!!!!!).
+    2. Define inner class within a outer class.
+        1. Nested Inner Class  (no `static` modifier)
+        2. Static Nested Class (use `static` modifier)
+4. Method Local Inner Classes
     1. Define inner class in **method** or **code block** within a outer class. it has class name.
     2. Could access outer class's all members, including private.
     3. Can not add access modifier, but can use `final` to modify.
@@ -2612,7 +2611,7 @@ But, there are many animals and many foods, you can't write a special `feed` to 
                         // 2. Could access outer class's all members, including private
                         // 5. Local inner class can directly access outer class members
                         System.out.println(n1); // 200
-                        // 8. If outer class and inner class have the same name member, follow the principle of **proximity**. if inner class want to access outer class member, using `outerClassName.this.memberName`.
+                        // 8. If outer class and inner class have the same name member, follow the principle of **proximity**. if inner class want to access outer class member, using `outerClassName.this.memberName`.  Outer.this represent which call m1 method.
                         System.out.println("outer class member " + Outer.this.n1); // 100
 
                         m2();
@@ -2644,7 +2643,7 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             class body
         }
         ```
-    3. 
+    3. Notes
         1. easy to develop, no need to define a class to **extend or implement**. Directly return a instance object.
             ```java
             interface IA {
@@ -2652,7 +2651,7 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             }
             
             // outer class
-            class Outer {
+            class Outer01 {
                 public void action() {
                     IA tiger = new IA(){ // anonymous inner class
                         @Override
@@ -2661,6 +2660,26 @@ But, there are many animals and many foods, you can't write a special `feed` to 
                         }
                     };
                     tiger.cry();
+
+                    // anonoymous class extends class
+                    Father jack = new Father("jack"){
+                        @Override
+                        public void say() {
+                            super.say();
+                        }
+                    };
+
+                    System.out.println(jack.getClass()); // Outer01$02
+                }
+            }
+
+            class Father {
+                public Father(String name) {
+                    System.out.println(name);
+                }
+
+                public void say(){
+                    System.out.println("father is saying...");
                 }
             }
 
@@ -2670,3 +2689,178 @@ But, there are many animals and many foods, you can't write a special `feed` to 
                 outer01.action();
             }
             ```
+        2. Call anonymous class.
+            1. Object call
+                ```java
+                Father father = new Father() {
+                    @Override
+                    public void hi() {
+                        System.out.println("hi");
+                    }
+                };
+                father.hi();
+                ```
+            2. anonymous class call
+                ```java
+                new Father() {
+                    @Override
+                    public void hi() {
+                        System.out.println("hi");
+                    }
+                }.hi();
+                ```
+        3. Inner class could access outer class member, including private. Directly access.
+            ```java
+            // outer class
+            private int n = 10;
+
+            // anonymous class
+            System.out.println(n);
+            ```
+        4. Can not add access modifier, since it equal to a local variable.
+        5. Scope, only in method or code block in defining.
+        6. Outer class can not access anonymous class member.
+    4. Best apply
+        1. As a actual argument to pass.
+            ```java
+            interface AA {
+                void cry();
+            }
+            class Test {
+                public static void main(String[] args) {
+                    show(new AA() {
+                        @Override
+                        public void cry() {
+                            System.out.println("do something");
+                        }
+                    });
+                }
+                public static void show(AA a) {
+                    a.cry();
+                }
+            }
+            
+            ```
+        2. Easy to develop. As a actual argument, can match each special require.
+            ```java
+            /*
+                1. Interface Bell, it has ring method.
+                2. Class Phone, it has alarmClock method, argument is Bell.
+                3. Test class Phone's ararmClock method, print u are No.1
+                4. Test class Phone's ararmClock method, print u are the best.
+            */
+            interface Bell {
+                void ring();
+            }
+            class Phone {
+                public void alarmClock(Bell bell){
+                    bell.ring();
+                }
+            }
+
+            // main
+            Phone phone = new Phone();
+
+            phone.alarmClock(new Bell() {
+                @Override
+                public void ring() {
+                    System.out.println("u are No.1");
+                }
+            });
+
+            phone.alarmClock(new Bell() {
+                @Override
+                public void ring() {
+                    System.out.println("u are the best");
+                }
+            });
+            ```
+6. Nested Inner Class 
+    1. Non-static modifier, define in outer class.
+    2. Can access outer class all member, including private.
+        ```java
+        class Outer {
+            private int n1 = 10;
+            public String name = "tom";
+
+            class Inner {
+                public void say() {
+                    //...
+                }
+            }
+        }
+        ```
+    3. Could add any access modifier(public, protected, default, private).
+    4. Scope in Outer class body.
+    5. Outer class access nested inner class by creating an object and access.
+    6. Outer other class access
+        1. Outer class.Inner class (as a member of outer class)
+            ```java
+            OuterClass.InnerClass innerclass = OuterClass.new InnerClass();
+            ```
+        2. Define a method which return instance of inner class in outer class.
+            ```java
+            // outer class
+            public InnerClass getInnerClassInstance() {
+                return new InnerClass();
+            }
+
+            // outer other class main
+            Outer.Inner innerInstance = new Outer().getInnerInstance();
+            ```
+    7. Same properties and methods. Proximity, if you still want to access outer member, using `Outer.this.xxx`.
+7. Static Nest Class
+    1. `static` modifier to modify, define in outer class, can access outer static members, but can not directly access non-static member.
+    2. can add access modifier(public, protected, default, private).
+    3. Scope in outer class.
+    4. Outer class access static nest class by creating object and access.
+    5. Using inner class.
+        1. Outer class.Inner class (as a member of outer class)
+            ```java
+            OuterClass.InnerClass innerclass = OuterClass.new InnerClass();
+            ```
+        2. Define a method which return instance of inner class in outer class.
+            ```java
+            // outer class
+            public InnerClass getInnerClassInstance() {
+                return new InnerClass();
+            }
+
+            // or 
+            public static InnerClass getInnerClassInstance_() {
+                return new InnerClass();
+            }
+
+            // outer other class main
+            Outer.Inner innerInstance = new Outer().getInnerInstance();
+
+            // or 
+            Outer.Inner innerInstance_ = Outer.getInnerInstance_();
+
+            // innerInstance.xxx; innerInstance.xxx();
+            ```
+    6. Same name. Proximity, if you still want to access outer member, using `Outer.this.xxx`.
+
+8. Practices
+    1. Output
+        ```java
+        public class TestOne {
+            public TestOne() {
+                Inner s1 = new Inner();
+                s1.a = 10;
+                Inner s2 = new Inner();
+                System.out.println(s2.a);
+            }
+
+            class Inner {
+                public int a = 5;
+            }
+
+            public static void main(String[] args) {
+                TestOne testOne = new TestOne(); // 5
+                Inner r = testOne.new Inner();
+                System.out.println(r.a); // 5
+            }
+        }
+        ```
+    p425
