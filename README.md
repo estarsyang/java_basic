@@ -2863,4 +2863,177 @@ But, there are many animals and many foods, you can't write a special `feed` to 
             }
         }
         ```
-    p425
+# Chapter 11 Enumeration
+
+## Enumeration
+
+1. Why need enumeration? 
+    1. Request: design a Season class.
+    2. tips:
+        1. Season only have four value, spring, summer, autumn, winter.
+        2. Value can not change.
+    3. Normal class.
+        ```java
+        class Season {
+            private String name;
+            // ....
+        }
+        // main
+        Season spring = new Season("spring");
+        // ...
+
+        // but, it can add some other value
+        // for the actual reason, it can be existed, 
+        // so it's wrong. we need to fix the size and value
+        Season other = new Season("other");
+        ```
+    4. So, we need to use enumeration.
+2. Introduction: An enum is a special "class" that represents a group of constants (unchangeable variables, like final variables).
+3. How to create a enum?
+    1. self class
+        1. No setXX methods, Since enum object is only readable.
+        2. use `final` and `static` to modify object and properties.
+        3. Enum object name use up letter to name.
+        4. Enum could also have many properties.
+            ```java
+                /*
+                    steps
+                        1. private constructor
+                        2. remove setXxx methods
+                        3. Create constants in class by using final, static keyword.
+                */
+            class Season {
+                private String name;
+
+                public final static SPRING = new Season("spring");
+                // ...
+
+                private Season() { // 1. private constructor
+                    this.name = name;
+                }
+                // remove setXxx
+                //public void setName(String name) {
+                //    this.name = name;
+                //}
+
+                // get method still in.
+
+            }
+
+            // main
+            System.out.println(Season.SPRING);
+            ```
+    2. use `enum` keyword to define.
+        ```java
+        /*
+            steps:
+            1. use `enum` to replace class
+            2. use 'constantName(formal argument list)' to replace 'public final static SPRING = new Season("spring");'
+            3. if enum has multiple constant, use ',' to seperate.
+            4. use `enum` to define a enumeration, constant object must be at the top of enumeration.
+        */
+        enum Season {
+            SPRING("spring"), SUMMER("summer"); // ...
+            private String name;
+
+            Season(String name) {
+                this.name = name;
+            }
+        }
+
+        // or 
+        enum Season {
+            SPRING,
+            SUMMER;
+        }
+        ```
+4. Notes:
+    1. Use `enum` to define a enum class, it will be default extend `Enum` class.
+    2. `public final static Season SPRING = new Season("spring");` to `SPRING("spring");` is using
+    `public Season(String name){this.name = name;}` constructor.
+    3. Using no arguments constructor to build enum object, arguments list and brackets could be omit.
+        ```java
+        enum Season {
+            SPRING, // no argument
+            SUMMER("summer");
+
+            Season(String name) {
+                this.name = name;
+            }
+            Season(){}
+
+        }
+        ```
+    4. Using `,` to seperate
+    5. Enum object must be at the top of enum class.
+5. `Enum` class methods
+    1. ToString: return current enum object name, subclass can override to return properties of object.
+    2. name: return enum object.
+    3. ordinal: return enum index in enum object. From 0 to max index.
+    4. values: return a array which includes all enum objects.
+    5. valueof: convert string to be a enum object. sring must be existed constant name, otherwise error.
+    6. compareTo: compare two enum constant, compare position index. SUMMER.ordinal - WINTER.ordinal
+6. Practice
+    1. define a `Week` enum and output lower letter day.
+        ```java
+        // main
+        Week[] values = Week.values();
+        for (Week value: values){
+            System.out.println(value);
+        }
+
+        // enum
+        enum Week {
+            MONDAY("monday"),
+            TUESDAY("tuesday"),
+            WEDNESDAY("wednesday");
+            //...
+
+            private String name;
+
+            Week(String name) {
+                this.name = name;
+            }
+            
+            @Override
+            public String toString() {
+                return name;
+            }
+        }
+        
+        ```
+7. Use `enum` keyword and can not use `extends` to extend other class since `enum` have already extend `Enum` class.
+8. `enum` still is a class and it can implement interface.
+    ```java
+    interface IPlaying{
+        public void playing();
+    }
+
+    enum Music implements IPlaying{
+        CLASSICMUSIC;
+
+        @Override
+        public void playing() {
+            System.out.println("play songs");
+        }
+    }
+    // main
+    Music.CLASSICMUSIC.playing();
+    ```
+## Annotation
+1. Introduction: Annotation is also called Metadata, use to declare package, class, method, property, constructor, local vairable, etc.
+2. Notes:
+    1. The same as comment, no affect program logic, but annotation could be compile or run, is equal to add information for code.
+3. Type
+    1. @Override: override super class method, only in methods.
+    2. @Deprecated: represent a element program is deprecated, but it still can use. Using in class, method, property and so on.
+    3. @SupperessWarning: limit compiler warnning no show in IDE. Using in state, method, class and so on.
+
+4. Meta annotation
+    1. Introduction: use to annotate annotation.
+    2. Types:
+        1. Retention: show scope of annotation, SOURCE, CLASS, RUNTIME
+        2. Target: describe where annotation used in.
+        3. Documented: describe the annotation should be in javadoc
+        4. Inherited: subclass will be inherited super class.
+p444
