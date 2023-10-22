@@ -9,7 +9,9 @@ public class Exception01 {
             int res = num1 / num2; // using try catch
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            System.out.println("keep running");
         }
-        System.out.println("keep running");
+
     }
 }
