@@ -1251,6 +1251,7 @@ setting base rules prevent StackOverflowError
    11. Auto assign variables name: the end of line add `.var`
    12. Clost other code tab: `command + w`
    13. Switch code tab: `control + left or control + right`
+   14. code quick snippet: `command+j`
 
 ## Package
 
