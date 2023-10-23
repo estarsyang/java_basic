@@ -256,4 +256,69 @@
    3. multiply
    4. divide
 
-p487
+## Date class
+
+1. Store in java.util.Date
+2. common methods
+   1. new Date(); // get current time
+   2. SimpleDateFormat
+      1. format: output the request format
+      2. parse: String -> Date
+
+## Calendar class
+
+1. Introduction: it's abstract class, and constuctor is private. Can use `getInstance()` to get instance.
+2. Common methods:
+   1. getInstance
+   2. GET
+3. Properties:
+   1. YEAR
+   2. MONTH
+   3. DAY_OF_MONTH  
+      ...
+
+## localDate, localTime, LocalDateTime
+
+1. localDate(date/year month day)
+2. LocalTime(time/hour minute second)
+3. LocalDateTime(date time/year month day hour minute second)
+4. common methods:
+   1. now
+   2. getYear
+   3. getMonth
+   4. getMonthValue  
+      ...
+   5. DateTimeFormatter: the same as `SimpleDateFormat`.
+      1. format  
+         ...
+
+## Instant
+
+1. Introduction: timestamp
+2. Common methods:
+   1. now
+   2. Date.from: instant to Date
+   3. Date.toInstant
+
+## Homework
+
+1. String reverse
+   1. "abcdef" --> "aedcbf"
+   2. create a method named `public static String reverse(String str,int start, int end)`.
+      ```java
+      public static String reverse(String str, int start, int end){
+         if (!(str != null && start >=0&&start<end&&end<str.length())){
+            throw new RuntimeException("input params error");
+         }
+         char[] chars = str.toCharArray();
+         char temp =' ';
+         for (int i=start,j=end;i<j;i++,j--){
+               temp = chars[i];
+               chars[i] = chars[j];
+               chars[j]=temp;
+         }
+         return new String(chars);
+      }
+      ```
+
+...
