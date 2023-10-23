@@ -277,7 +277,7 @@
    3. DAY_OF_MONTH  
       ...
 
-## localDate, localTime, LocalDateTime
+## LocalDate, LocalTime, LocalDateTime
 
 1. localDate(date/year month day)
 2. LocalTime(time/hour minute second)
