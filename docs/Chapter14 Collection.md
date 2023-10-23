@@ -149,5 +149,78 @@
    2. It has two properties, one is `first`, represent first node. Other is `last` represent the last node.
    3. Each node has three properties, `prev`, `next`, `item`. `prev` represent previous node, `next` represent next node, item represent currnt node's data.
    4. add and delete item is not using array.
+3. ArrayList vs LinkedList
+   ||store data|add and delete efficient|update and read efficient|
+   |----|----|----|----|
+   |ArrayList|mutable array|low efficient, array expanding|high|
+   |LinkedList|double linked list|high efficient, using linked list to add|low|
+   1. update and reading more, choose ArrayList
+   2. create and delete more, choose LinkedList
+   3. Most of operation is reading, so choose ArrayList.
+   4. In a project, module A using ArrayList, module B using LinkedList. Base on business.
 
-p515
+## Set
+
+1. Introduction: The set interface is present in java.util package and extends the Collection interface. It is an `unordered` collection of objects in which **duplicate values cannot be stored**. It is an interface that implements the mathematical set. This interface contains the methods inherited from the Collection interface and adds a feature that restricts the insertion of the duplicate elements.
+2. Feature:
+   1. no order, no index.
+   2. no duplicate value.
+3. Common methods:
+   1. add: success retrun true otherwise false.
+   2. iterate
+   3. remove  
+      ...
+4. Iterate
+
+   ```java
+   // iterator
+    Iterator iterator = hashSet.iterator();
+    while (iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
+
+    //enhance for
+    for (Object item:hashSet){
+        System.out.println(item);
+    }
+   ```
+
+## HashSet
+
+1. Introduction
+
+   1. HashSet implement Set interface
+   2. HashSet actually is HashMap
+   3. Could store null
+   4. HashSet not ensure order, base on Hash function
+   5. No duplicate value/element
+
+2. Source code
+
+   1. Implement a HashSet structure.
+
+      ```java
+      Node[] table = new Node[16];
+      System.out.println("table=" + table);
+
+      Node john = new Node("john",null);
+      table[2] = john;
+
+      Node jack = new Node("jack", null);
+      john.next = jack;
+
+      Node rose = new Node("rose", null);
+      jack.next = rose;
+
+      table[3] = new Node("lucy",null);
+      ```
+
+   2. How `add` method work?
+      1. The root of HashSet is HashMap
+      2. add one element, first get its hash value. And then, tranforms Hash value to a index value.
+      3. find the data table, and check content of the index value is empty or not.
+      4. if it's empty, store in this index.
+      5. if it is not empty, using `equals` to compare, if result is equal, abort adding. if not,add it to the end(like linked list, add it to the end of list).
+      6. In Java 8,if the size of a linkedlist is equal to `TREEIFY_THRESHOLD`(default is 8), and size of tbale is bigger or equal to `MIN_TREEIFY_CAPACITY`(default is 64), and then transformed from Linked list to Red Black tree (self balancing BST).
+
+p521
