@@ -222,5 +222,25 @@
       4. if it's empty, store in this index.
       5. if it is not empty, using `equals` to compare, if result is equal, abort adding. if not,add it to the end(like linked list, add it to the end of list).
       6. In Java 8,if the size of a linkedlist is equal to `TREEIFY_THRESHOLD`(default is 8), and size of tbale is bigger or equal to `MIN_TREEIFY_CAPACITY`(default is 64), and then transformed from Linked list to Red Black tree (self balancing BST).
+   3. p521-p524 HashSet source code, **hash code and equal**
+   4. Exercise
+      1. a `Employee` class, it have `age`, `name` properties.
+      2. Create three employee, store in HashSet.
+      3. When `name` and `age` are equal to exist data, it's the same employee. Can't be inserted into HashSet.
 
-p521
+## LinkedHashSet
+
+1. Introduciton:
+
+   1. Subclass of `HashSet`.
+   2. The internal of LinkedHashSet is LinkedHashMap, it maintains a array and double linked list.
+   3. LinkedHashSet using hashCode of element to insert element to which position. And use linked list to maintain the `order`(it has a `order`).
+   4. LinkedHashSet can't add duplicate element.
+
+2. How LinkedHashSet add?
+   1. The internal of LinkedHashSet maintains a hash table and double linked list. LinkedHashSet has `head` and `tail`.
+   2. Each node has `before` and `after` properties to form a double linked List.
+   3. When adding a new Element, first, to get the hashCode of this element. Second, to get the index of hash table to insert the element. Third, insert the element into double linked list(if the element already exists, no insert, the insert rules is the same as Hashset).
+   4. Base on these process, Iterate LinkedHashSet couble be ensure the order of insert is the same as the order of output.
+
+p529
