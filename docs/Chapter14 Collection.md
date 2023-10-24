@@ -238,9 +238,26 @@
    4. LinkedHashSet can't add duplicate element.
 
 2. How LinkedHashSet add?
+
    1. The internal of LinkedHashSet maintains a hash table and double linked list. LinkedHashSet has `head` and `tail`.
    2. Each node has `before` and `after` properties to form a double linked List.
    3. When adding a new Element, first, to get the hashCode of this element. Second, to get the index of hash table to insert the element. Third, insert the element into double linked list(if the element already exists, no insert, the insert rules is the same as Hashset).
    4. Base on these process, Iterate LinkedHashSet couble be ensure the order of insert is the same as the order of output.
 
-p529
+3. Exercise
+   1. a `Car` class, it have `name`, `price` properties.
+   2. Create three cars, store in LinkedHashSet.
+   3. When `name` and `price` are equal to exist data, it's the same employee. Can't be inserted into LinkedHashSet.
+
+## Map
+
+1. Introduction:An object that maps keys to values. A map cannot contain duplicate keys; each key can map to at most one value.
+2. Feartures:
+   1. Map and Collection could exist side by side. Using to store a mapping relationship data(key-value).
+   2. `key` and `value` could be any data type, and will be encapsulated to `HashMap$Node` object.
+   3. `key` can be not duplicated, if insert a similar `key`, the value of the `key` will replace the original value.
+   4. `value` could be duplicated.
+   5. `key` could be `null`, value also.
+   6. String class also could be `key` of a `Map` instance.
+   7. `key` and `value` is a "one to one" relationship, so you can find value by using key.
+   8. A key-value pair is stored in a Node, since Node implements `Entry` interface, some books write that a key-value is a `Entry`.
