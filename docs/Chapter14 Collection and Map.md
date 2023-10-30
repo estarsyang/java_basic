@@ -1,6 +1,7 @@
 # Chapter14 Collection
 
 1. Introduction:A collection is an object that represents a group of objects (such as the classic Vector class). A collections framework is a unified architecture for representing and manipulating collections, enabling collections to be manipulated independently of implementation details.
+   1. Relationship
 2. Advantages:
    1. Could store any more objects, easy to use.
    2. Provide a series of methods to operate object, like `add`,`remove`,`set`,`get` and so on.
@@ -261,3 +262,96 @@
    6. String class also could be `key` of a `Map` instance.
    7. `key` and `value` is a "one to one" relationship, so you can find value by using key.
    8. A key-value pair is stored in a Node, since Node implements `Entry` interface, some books write that a key-value is a `Entry`.
+3. common methods
+   1. put
+   2. remove
+   3. get
+   4. size
+   5. isEmpty
+   6. clear
+   7. containsKey
+      ...
+4. Iterate
+
+   1. Introduction: If you want to iterate a `Map`,it's not easy. You need to use those methods,`containsKey`, `keySet`, `entrySet` and `values`.
+   2. Steps:
+
+      1. Get all keys by using `keySet` and find value base on key.
+      2. Only get all values by using `values`.
+      3. entrySet
+
+         ```java
+         // 1. using keySet
+         Set keyset = hashMap.keySet();
+         for (Object key : keyset) {
+               System.out.println(key + "-" + hashMap.get(key));
+         }
+
+         // 2.get all values
+         Collection values = hashMap.values();
+         for (Object value : values) {
+               System.out.println(value);
+         }
+
+         // 3. entrySet
+         Set entrySet = hashMap.entrySet();
+         for (Object entry : entrySet) {
+               // entry to Map.Entry
+               Map.Entry m = (Map.Entry) entry;
+               System.out.println(m.getKey() + "-" + m.getValue());
+         }
+         ```
+
+5. Conclusion
+
+   1. Common implementation classes of `Map` interface: `HashMap`, `Hashtable` and `Peoperties`.
+   2. The top using rate of implementation of `Map` is `HashMap`.
+   3. `HashMap` is using key-vale pair to store data.
+   4. Key can't be the same, but value is ok. `null` could be key or value.
+   5. If adding the same key, old value will be replaced by new value.
+   6. Same as `HashSet`, it can't be ensure the order of data, since it's base on `Hashtable` to store data.
+   7. `HashMap` is not synchronized, so thread is not safed.
+
+6. Analyse `HashMap` source code
+
+## Hashtable
+
+1.  Introduction
+    1. store key-value pair.
+    2. key and valu can't be `null`, otherwise throw error.
+    3. Same as `HashMap`, most of methods are the same.
+    4. `Hashtable` is thread safed.
+
+## Properties
+
+1. Introduction:
+   1. Extend `Hashtable` class and implement `Map` interface, it also uses a key-value pair to store data.
+   2. Same as `Hashtable`.
+   3. Could read `xxx.properties` files and convert content to `Properties` Object, read and modify.
+   4. `xxx.properties` usually as a config files.
+2. Common methods
+   1. get
+   2. remove
+   3. put
+      ...
+
+## How to choose a `Collection` in developing?
+
+Base on your business, these are some rules below:
+
+1. Determine the type of storage(a list of Object of a list of key-value)
+   1. Object: `Collection` interface
+      1. Allow duplicate: using List
+         1. more add and delete operations: `LinkedList`(Base on a double linked list.)
+         2. more read and modify operations: `ArrayList`(Base on a mutable array.Array\<Object\>)
+      2. No duplicate: using Set
+         1. no order: `HashSet`(base on `HashMap`, maintain a `Hashtable`(array+linkedlist+red black tree),)
+         2. order: `TreeSet`
+         3. Order of insert and output is the same: `LinkedHashSet`(maintain array+double linked list)
+   2. key-value:Map
+      1. Key no order: `HashMap`(maintain array + linked list + red black tree)
+      2. Key order: `TreeMap`
+      3. Order of key insert and key output is the same: `LinkedHashMap`
+      4. Read files: `Properties`
+
+p544
