@@ -1,7 +1,17 @@
 # Chapter14 Collection
 
 1. Introduction:A collection is an object that represents a group of objects (such as the classic Vector class). A collections framework is a unified architecture for representing and manipulating collections, enabling collections to be manipulated independently of implementation details.
-   1. Relationship
+   1. Structure
+      1. Iterable[interface]
+         1. Collection[interface]
+            1. List
+               1. Vector
+               2. ArrayList
+               3. LinkedList
+            2. Set
+               1. HashSet
+               2. TreeSet
+            3. ...
 2. Advantages:
    1. Could store any more objects, easy to use.
    2. Provide a series of methods to operate object, like `add`,`remove`,`set`,`get` and so on.
@@ -253,6 +263,13 @@
 ## Map
 
 1. Introduction:An object that maps keys to values. A map cannot contain duplicate keys; each key can map to at most one value.
+   1. Structure
+      1. Map
+         1. HashMap
+            1. LinkedHashMap
+         2. TreeMap
+         3. Hashtable
+            1. Properties
 2. Feartures:
    1. Map and Collection could exist side by side. Using to store a mapping relationship data(key-value).
    2. `key` and `value` could be any data type, and will be encapsulated to `HashMap$Node` object.
@@ -354,4 +371,20 @@ Base on your business, these are some rules below:
       3. Order of key insert and key output is the same: `LinkedHashMap`
       4. Read files: `Properties`
 
-p544
+## Collections util class
+
+1. Introduction: `Collections` is a tool what operate `Set`, `List` and `Map`. It provides a series of static methods to , query, modify and others collection element.
+2. Sort
+   1. reverse(List): reverse list
+   2. shuffle(List): random sort
+   3. sort(List):normal sort, base on ASCII code.
+   4. sort(List, Comparator): special sort, base on Comparator's result.
+   5. swap(List, int, int): swap element of index i and j
+3. Query and replace
+   1. Object max(Collection): base on the normal order, return max object.
+   2. Object max(Collection, Comparator):base on the Comparator order, return max object.
+   3. Object min(Collection): base on the normal order, return min object.
+   4. Object min(Collection, Comparator):base on the Comparator order, return min object.
+   5. int frequency(Collection, Object): return the number of input Object in Collection
+   6. void copy(List dest, List src): copy element of src to dest. Need to init dest List, the length of dest is equal to the length of src at least.
+   7. boolean replaceAll(List list, Object oldVal, Object newVal): use new value replace old value in List object
