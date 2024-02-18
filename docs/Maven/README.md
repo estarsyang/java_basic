@@ -72,3 +72,21 @@ write down dependency what u want. after that, update maven setting. it will aut
 
 [video](https://www.bilibili.com/video/BV1m84y1w7Tb/)
 p58
+
+## Spring
+
+### quick start springboot web app
+
+start an application and access `localhost:8080/hello`, and then return `Hello world`.
+
+1. create springboot project, and select web dependency. `Web`-`SpringWeb`.
+2. create request handle class `HelloController`, add request method named `hello`, and add Comment.
+
+   ```java
+   @RestController
+
+   ...
+       @RequestMapping("/hello")
+   ```
+
+3. running, and test
