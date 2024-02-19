@@ -90,3 +90,196 @@ start an application and access `localhost:8080/hello`, and then return `Hello w
    ```
 
 3. running, and test
+
+## HTTP
+
+Hyper Text Transfer Protocol, defined rules what data transfer between clients and servers.
+
+### request
+
+```HTTP
+GET /hello HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Host: localhost:8080
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36
+sec-ch-ua: "Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+
+```
+
+1. request line
+   `GET /hello HTTP/1.1`
+   `GET` request method
+   `/hello` request path
+   `HTTP/1.1` request protocol
+
+2. request header
+   |header|desc|
+   |---|---|
+   |host|request host name|
+   |User-Agent|browser version|
+   |Accept|resources type what browser accept|
+   |Accept-Language|browser receive language|
+   |Accept-Encoding|browser Compression type what browser receive|
+   |Content-Type|data type what request|
+   |Content_length|size of request (unit:byte)|
+   ...
+3. request body
+   `{"status":1, name:"OPPO"}`
+   get method: request params in `request line`, no request body, `get` request has size limit.
+   post method: request params in request body, `post` request no size limit.
+
+### response
+
+```HTTP
+HTTP/1.1 200 ok
+Content-Type: text/html;charset=UTF-8
+Content-Length: 12
+Date: Mon, 19 Feb 2024 07:30:08 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{name:"oppo",status:1}
+```
+
+1. response line
+   `HTTP/1.1 200 ok`
+   `HTTP/1.1` http protocol
+   `200` status code
+   `ok` descript
+2. response header
+
+```
+Content-Type: text/html;charset=UTF-8
+Content-Length: 12
+Date: Mon, 19 Feb 2024 07:30:08 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+```
+
+3. response body
+   `{name:"oppo",status:1}` store response data
+
+#### http status code
+
+| code | desc                                                                                                                             |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 1xx  | responsing-temperate code, represent request received, and tell client continus request or if it has already finsh and ignore it |
+| 2xx  | success-represent request has already received and handle is done                                                                |
+| 3xx  | redirect-redirect to other place, need client start a new request to handle all process                                          |
+| 4xx  | client error - Handling errors, the responsibility lies with the client                                                          |
+| 5xx  | server error - Handling errors, the responsibility lies with the server                                                          |
+
+#### http response header
+
+| header           | desc                                                                    |
+| ---------------- | ----------------------------------------------------------------------- |
+| Content-Type     | response content type, such as text/html,application/json               |
+| Content-Length   | length of response content                                              |
+| Content-Encoding | comprese encoding, such as gzip                                         |
+| Cache-Control    | tell client how to cache, such as max-age=300 represent max cache 300 s |
+| Set-Cookie       | tell browser set cookie for current web-site                            |
+
+## Tomcat
+
+Apache Tomcat is an open-source web server and Servlet container for Java code. It's a production-ready Java development tool used to implement many types of Jakarta EE (formerly known as Java EE) specifications.
+
+### web service
+
+- Encapsulate the http protocol to simplify web program development
+- Deploy web projects and provide online information browsing services to the outside world
+
+### Tomcat
+
+- A lightweight web server
+
+### basic use
+
+1. download
+2. setting default.
+3. run `tomcat/bin/start.sh`
+
+## Request - Response
+
+### Request
+
+1. original method: `HttpServletRequest`
+2. SpringBoot:
+   1. same params name: directly get query. `get` or `post`
+   2. not the same name: use `@RequestParam` to cast name. But the param is required, unless setting is `required:false`
+
+### params receive
+
+1. simple param: one or two params
+2. complex params: at least two params, for example, `User` has `name`,`age` and `Address`. And `Address` has `province` and `city`.
+   1. define Class `User` and receive
+   ```java
+   public String complexPojo(User user){
+       System.out.println(user);
+       return "ok!!!";
+   }
+   ```
+3. Array or List params.
+
+   `path?hobby=a&hobby=b&hobby=c`, request params is the same as original params.
+
+   1. Array
+
+   ```java
+   public String arrayParam(String[] hobby){
+       System.out.println(Arrays.toString(hobby));
+       return "ok!!!arrayParam";
+   }
+   ```
+
+   2. list
+
+   ```java
+   public String listParam(@RequestParam List<String> hobby){
+      System.out.println(hobby);
+      return "ok!!!listParam";
+   }
+   ```
+
+4. Datetime
+   use `@DateTimeFormat` to define and convert
+   ```java
+   public String dateParam(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")LocalDateTime updateTime){
+       System.out.println(updateTime);
+       return "ok";
+   }
+   ```
+5. JSON
+   post, use `@RequestBody` to receive
+   ```java
+   public String jsonParam(@RequestBody User user){
+       System.out.println(user);
+       return "ok!";
+   }
+   ```
+6. path params
+   `/path/1`, `@PathVariable` to define variable and use.
+   ```java
+   public String pathParam(@PathVariable Integer id){
+       System.out.println(id);
+       return "ok!";
+   }
+   ```
+   `/path/1/tom`
+   ```java
+   public String mulPathParam(@PathVariable Integer id,@PathVariable String name){
+       System.out.println(id+": "+ name);
+       return "ok!";
+   }
+   ```
+   p73
