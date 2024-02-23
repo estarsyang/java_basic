@@ -282,4 +282,93 @@ Apache Tomcat is an open-source web server and Servlet container for Java code. 
        return "ok!";
    }
    ```
-   p73
+
+## `@ResponseBody`
+
+maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+
+1. Return String, directly return
+2. Object or List, return JSON.
+
+## Uniform return results
+
+`Result(code,msg,data)`
+
+## web system design
+
+1. three layer
+
+   1. Controller: control layer, receive request from client, handle request and return response.
+   2. Service: business logic layer, hander detail business logic.
+   3. Dao: daa access Object, Response for data access operation, including create,delete, update and quer data.
+
+## IOC， DI
+
+1. IOC
+   Inversion Of Control, IOC, a design principle that inverts the flow of control in a program by decoupling components,Creating object from itself move to outsite.
+2. DI
+   Dependency Injection, DI, inject dependencies (i.e., objects) into an object, rather than the object being responsible for creating and managing its dependencies.
+3. Bean
+   A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container.
+
+### `@Component` and `@Autowired`
+
+1. `@Component` is an annotation that allows Spring to detect our custom beans automatically.
+2. `@Autowired` is an annotation that used for automatic dependency injection.
+
+### Bean
+
+if a object need to manage by `IOC`, need to add an annotation to the class.
+|annotation|desc|position|
+|----|----|----|
+|@Component|annotate a bean||
+|@Controller|other annotatin, different with`@Component`| use in controller class|
+|@Service|other annotatin, different with`@Component`| use in business class|
+|@Repository|other annotatin, different with`@Component`| use in data access class|
+
+1. name: default is class name, such as `EmpService`, its bean name is `empService`. Default rule is first letter is
+   low case, other is use `Camel` rule.
+
+### `@Autowired`
+
+if exist multiple same type bean, `@Autowired` will be fail. need to use other annotation to declare
+
+```java
+# ServerA
+@Service
+public class EmpServiceA implements EmpService {}
+
+# ServerB
+@Service
+public class EmpServiceB implements EmpService {}
+
+# controller class
+    @Autowired
+    private EmpService empService; // error
+```
+
+1. `@Primary`, to clear use which class. below is using `EmpServiceA`
+
+```java
+# ServerA
+@Primary
+@Service
+public class EmpServiceA implements EmpService {}
+```
+
+2. `@Qualifier` to annotate which class.
+
+```java
+# controller class
+@Qualifier("empServiceB")
+@Autowired
+private EmpService empService;
+```
+
+3. `@Resource` to replace `@Autowired`, `@Autowired` is provided by `spring`, `@Resource` by java.
+
+```java
+# controller class
+@Resource(name="empServiceB")
+private EmpService empService;
+```
