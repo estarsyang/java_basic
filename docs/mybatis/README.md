@@ -66,4 +66,21 @@ spring.datasource.password=12345678
 Java DataBase Connectivity, is a set of API what use Java to operate relation database.
 the JavaSoft specification of a standard application programming interface (API) that allows Java programs to access database management systems.
 
-p119
+## connection pool
+
+a cache of database connections maintained so that the connections can be reused when future requests to the database are required. It is a container, response to allot and manage database connection.
+
+## Lombok
+
+Lombok is a java class libary, it could automatic generated constructor, getter/setter, equals, hashcode, toString and so on by using annotation. And could automatic generated variable log, improve efficience.
+
+| annotation              | desc                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| @Getter/@Setter         | provide all properties for getter,setter                                     |
+| @ToString               | auto generate toString method                                                |
+| @EqualsAndHashCode      | auto rewrite `equals` and `hashCode` for all non-static properties           |
+| **@Data**               | provide all generate methods(@Getter,@Setter, @ToString, @EqualsAndHashCode) |
+| **@NoArgsConstructor**  | generate no arguments constructors                                           |
+| **@AllArgsConstructor** | generate all arguments constructors except `statis` modify properties        |
+
+p122

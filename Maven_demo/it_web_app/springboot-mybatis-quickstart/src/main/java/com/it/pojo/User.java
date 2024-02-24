@@ -1,5 +1,12 @@
 package com.it.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     public int id;
     public String name;
@@ -7,6 +14,7 @@ public class User {
     public short gender;
     public String phone;
 
+    /*
     public User() {
     }
 
@@ -68,4 +76,5 @@ public class User {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+    */
 }
