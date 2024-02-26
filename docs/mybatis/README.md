@@ -83,4 +83,26 @@ Lombok is a java class libary, it could automatic generated constructor, getter/
 | **@NoArgsConstructor**  | generate no arguments constructors                                           |
 | **@AllArgsConstructor** | generate all arguments constructors except `statis` modify properties        |
 
-p122
+## basic operation
+
+1. prepare data
+2. create a new springboot project, select start dependencies(mybatis, mysql drive, lombok)
+3. config database properties
+4. create class `Emp`
+5. prepare `Mapper` interface `EmpMapper`
+
+### delete
+
+1. `mapper` `sql` statement receive variable use `#{xxx}` to receive. the same name is best.
+
+```java
+// ...
+ @Delete("delete from emp where id=#{id}")
+ public void delete(Integer id);
+// ...
+```
+
+### prepare compiler sql
+
+`@Delete("delete from emp where id=#{id}")`
+advantages: higher performance, higher safe(prevent SQL inject)
