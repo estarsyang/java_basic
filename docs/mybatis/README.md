@@ -153,7 +153,7 @@ if want to fuzzy query, such as `like '%tom%'` and others, please use concat sin
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 ```
 
-### xml cast file
+### xml file cast sql
 
 1. rules:
 
