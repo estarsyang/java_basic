@@ -106,3 +106,114 @@ Lombok is a java class libary, it could automatic generated constructor, getter/
 
 `@Delete("delete from emp where id=#{id}")`
 advantages: higher performance, higher safe(prevent SQL inject)
+
+### Insert without return primary key
+
+```java
+@Insert("insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+            "VALUES (#{username},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime},#{updateTime})")
+    public void insert(Emp emp);
+```
+
+### Insert with return primary key
+
+add `@Options` modifier
+
+```java
+    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Insert("insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+            "VALUES (#{username},#{name},#{gender},#{image},#{job},#{entrydate},#{deptId},#{createTime},#{updateTime})")
+    public void insert(Emp emp);
+```
+
+### update
+
+```java
+    @Update("update emp set username=#{username},name=#{name},gender=${gender},image=#{image}," +
+            "job=#{job},entrydate=#{entrydate},dept_id=#{deptId},update_time=#{updateTime} where id=#{id};")
+    public void update(Emp emp);
+```
+
+### query
+
+if it appears underscore is not match camel, like `dept_id` and `deptId`, uneed to open underscore to camel-cass in mybatis properties. otherwise, it will not get correct value in result.
+
+```java
+    @Select("select * from emp where id=#{id};")
+    public Emp getById(Integer id);
+```
+
+### condition query
+
+if want to fuzzy query, such as `like '%tom%'` and others, please use concat since `#{varibale}` can't using in `''`.
+
+```java
+    @Select("select * from emp where name like concat('%',#{name},'%') and gender =#{gender} and" +
+            "(entrydate between #{begin} and #{end}) order by  update_time desc ;")
+    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+```
+
+### xml cast file
+
+1. rules:
+
+   1. The name of file what cast by xml is the same as `Mapper` interface, and in the same package(same package and same name)
+   2. `namespace` of xml file need to the same as `Mapper` interface
+   3. `id` in sql statement of xml file must be the same as `Mapper` interface method, and return the same type.
+
+2. demo
+
+```java
+    @Select("select * from emp where name like concat('%',#{name},'%') and gender =#{gender} and" +
+            "(entrydate between #{begin} and #{end}) order by  update_time desc ;")
+    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+```
+
+to modify
+
+```java
+    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--EmpMapper.xml-->
+<mapper namespace="com.itheima.mapper.EmpMapper">
+
+    <select id="list" resultType="com.itheima.pojo.Emp">
+        select * from emp where name like concat('%',#{name},'%') and gender =#{gender}
+        and (entrydate between #{begin} and #{end}) order by  update_time desc ;
+    </select>
+</mapper>
+```
+
+### dynamic sql
+
+1. `if`
+   `if` use to determine whether the condition is met. Using `test` property to determine, if result is `true`, concat sql. `where` use to determine whether add `and` and `or` in sql condition.
+
+```xml
+    <!-- ... -->
+    <select id="list" resultType="com.itheima.pojo.Emp">
+        select * from emp
+        <where>
+            <if test="name != null">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender !=null">
+                and gender =#{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and (entrydate between #{begin} and #{end})
+            </if>
+            order by update_time desc ;
+        </where>
+    </select>
+    <!-- ... -->
+```
+
+p131
