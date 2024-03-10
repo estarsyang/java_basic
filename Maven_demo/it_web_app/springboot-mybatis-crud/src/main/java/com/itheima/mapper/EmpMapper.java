@@ -30,4 +30,10 @@ public interface EmpMapper {
 //    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+
+
+    public void update2(Emp emp);
+
+//  delete ids
+    public void deleteByIds(List<Integer> ids);
 }

@@ -193,27 +193,73 @@ to modify
 
 ### dynamic sql
 
-1. `if`
-   `if` use to determine whether the condition is met. Using `test` property to determine, if result is `true`, concat sql. `where` use to determine whether add `and` and `or` in sql condition.
+1. `if`, condition update
+   `if` use to determine whether the condition is met. Using `test` property to determine, if result is `true`, concat sql.
+
+   1. Tag `where` use to determine whether add `and` and `or` in sql condition and replace `where` keyword in sql.
+
+      ```xml
+          <!-- ... -->
+          <select id="list" resultType="com.itheima.pojo.Emp">
+              select * from emp
+              <where>
+                  <if test="name != null">
+                      name like concat('%',#{name},'%')
+                  </if>
+                  <if test="gender !=null">
+                      and gender =#{gender}
+                  </if>
+                  <if test="begin != null and end != null">
+                      and (entrydate between #{begin} and #{end})
+                  </if>
+                  order by update_time desc ;
+              </where>
+          </select>
+          <!-- ... -->
+      ```
+
+   2. `set`
+
+   remove unneccessary comma, and it is replace `set` key word in sql.
+
+   ```xml
+   <!-- ... -->
+   <set>
+       <if test="username != null">username=#{username},</if>
+       <if test="name != null">name=#{name},</if>
+       <if test="gender != null">gender=${gender},</if>
+       <if test="image != null">image=#{image},</if>
+       <if test="job != null">job=#{job},</if>
+       <if test="entrydate != null">entrydate=#{entrydate},</if>
+       <if test="deptId != null">dept_id=#{deptId},</if>
+       <if test="updateTime != null">update_time=#{updateTime}</if>
+   </set>
+   <!-- ... -->
+   ```
+
+2. `foreach`
+   batch delete.
+   - collection: loop list
+   - item: every item
+   - separator: sperate by what, below demo separate by `,`
+   - open: contcat sql start with what
+   - close: contcat sql end with what
 
 ```xml
-    <!-- ... -->
-    <select id="list" resultType="com.itheima.pojo.Emp">
-        select * from emp
-        <where>
-            <if test="name != null">
-                name like concat('%',#{name},'%')
-            </if>
-            <if test="gender !=null">
-                and gender =#{gender}
-            </if>
-            <if test="begin != null and end != null">
-                and (entrydate between #{begin} and #{end})
-            </if>
-            order by update_time desc ;
-        </where>
-    </select>
-    <!-- ... -->
+delete from  emp where id in
+<foreach collection="ids" item="id" separator="," open="(" close=")">
+    #{id}
+</foreach>
 ```
 
-p131
+3. `sql` and `include`
+   Improve code reusability, Extract same code to form a `sql` block.
+
+```xml
+<!-- ... -->
+<sql id="commonSelect">
+    select id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time from emp
+</sql>
+<!-- ... -->
+<include refid="commonSelect" />
+```

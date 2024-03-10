@@ -296,11 +296,11 @@ maps the HttpRequest body to a transfer or domain object, enabling automatic des
 
 ## web system design
 
-1. three layer
+1. basic web three layers - Controller, Service, Dao
 
    1. Controller: control layer, receive request from client, handle request and return response.
    2. Service: business logic layer, hander detail business logic.
-   3. Dao: daa access Object, Response for data access operation, including create,delete, update and quer data.
+   3. Dao: data access Object, Response for data access operation, including create,delete, update and quer data.
 
 ## IOC， DI
 

@@ -6,8 +6,31 @@
 <!--EmpMapper.xml-->
 <mapper namespace="com.itheima.mapper.EmpMapper">
 
+    <sql id="commonSelect">
+        select id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time from emp
+    </sql>
+
+
+
+<!--    condition update-->
+    <select id="update2" resultType="com.itheima.pojo.Emp">
+        update emp
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="gender != null">gender=${gender},</if>
+            <if test="image != null">image=#{image},</if>
+            <if test="job != null">job=#{job},</if>
+            <if test="entrydate != null">entrydate=#{entrydate},</if>
+            <if test="deptId != null">dept_id=#{deptId},</if>
+            <if test="updateTime != null">update_time=#{updateTime}</if>
+        </set>
+        where id=#{id};
+    </select>
+
+<!--    query-->
     <select id="list" resultType="com.itheima.pojo.Emp">
-        select * from emp
+        <include refid="commonSelect" />
         <where>
             <if test="name != null">
                 name like concat('%',#{name},'%')
@@ -20,5 +43,13 @@
             </if>
             order by update_time desc ;
         </where>
+    </select>
+
+<!--    bat delete-->
+    <select id="deleteByIds" resultType="com.itheima.pojo.Emp">
+        delete from  emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </select>
 </mapper>
