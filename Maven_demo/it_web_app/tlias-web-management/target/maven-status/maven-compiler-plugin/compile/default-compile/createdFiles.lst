@@ -8,5 +8,6 @@ com/itheima/pojo/Result.class
 com/itheima/pojo/Dept.class
 com/itheima/pojo/Emp.class
 com/itheima/mapper/EmpMapper.class
+com/itheima/pojo/PageBean.class
 com/itheima/service/DeptService.class
 com/itheima/controller/EmpController.class

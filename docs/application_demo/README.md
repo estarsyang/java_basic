@@ -68,4 +68,17 @@ public class DeptController{
 }
 ```
 
-p140
+3. employee
+   1. query all employee
+      1. annotation
+         `@RequestParam` could be set default value.
+         ```java
+         // ...
+         public Result page(@RequestParam(defaultValue = "1") Integer page,
+                     @RequestParam(defaultValue = "10") Integer pageSize) {
+            // ...
+         }
+         // ...
+         ```
+
+p142
