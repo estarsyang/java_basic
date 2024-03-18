@@ -80,5 +80,11 @@ public class DeptController{
          }
          // ...
          ```
+         1. pagination
+            PageHelp plugin
+   2. condition query
+      using `if` and `where` tag in `xml` file.
+   3. batch delete emps
+      using `foreach` tag in `xml` file.
 
-p142
+p145
