@@ -69,6 +69,7 @@ public class DeptController{
 ```
 
 3. employee
+
    1. query all employee
       1. annotation
          `@RequestParam` could be set default value.
@@ -87,4 +88,64 @@ public class DeptController{
    3. batch delete emps
       using `foreach` tag in `xml` file.
 
-p145
+      1. annotation: `@PathVariable`
+
+   4. add new emp
+
+      1. annotation: `@RequestBody`
+
+   5. update
+      1. get employee information
+         `getById`
+      2. update
+
+4. file upload
+
+   1. Notes
+
+      1. Frontend
+         1. form type is `file`
+         2. post method
+         3. form need to set `enctype` property is `multipart/form-data`.
+      2. Backend
+         1. server need to set receive type is `MultipartFile`.
+      3. springboot file default size : 1MB, need to redefined upload limit size.
+
+         ```properties
+         # single file upload limit size
+         spring.servlet.multipart.max-file-size=10MB
+
+         # multiple files upload limit size
+         spring.servlet.multipart.max-request-size=100MB
+         ```
+
+      4. `UUID` tool to generate a unique id to name a uploaded file.
+      5. `@Value` to get value from properties file. `@Value("${key in properties file}")`
+         ```java
+         @Value("${test}")
+         private String test;
+         ```
+
+5. `yml` or `yaml` config file
+   1. Grammar
+      1. be careful to UpperCase and lowerCase
+      2. must be `space` before value
+      3. use indentation to represent layer relationship. no `Tab` must `space`
+      4. `#` represent comment.
+   2. data type
+      1. object/Map
+         ```yml
+         user:
+           name: tom
+         ```
+      2. Array/List/Set
+         ```yml
+         # an Array/List/Set hobby has two values java and c
+         hobby:
+           - java
+           - c
+         ```
+6. `@ConfigurationProperties`
+   auto inject value to the same name variable which in `yml` config file.
+
+p156
