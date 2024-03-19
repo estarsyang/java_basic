@@ -156,5 +156,54 @@ public class DeptController{
 
 3. cookie and token
 4. JWT
+   1. generate: use `jjwt` dependency.
+   2. `jjwt` generate jwt in springboot need to in jdk1.8, if u using 11 or higher version, u need to install `javax.xml.bind`
+      ```xml
+      <!-- pom.xml -->
+      <!-- ... -->
+      <dependency>
+         <groupId>javax.xml.bind</groupId>
+         <artifactId>jaxb-api</artifactId>
+         <version>2.3.1</version>
+      </dependency>
+      <!-- ... -->
+      ```
+5. Filter
+   intercept request to do some handlers, for example, login check.
+   need to add annoation `@WebFilter(urlPatterns = "/*")` in filter class.
 
-p163
+   ```java
+   @WebFilter(urlPatterns = "/*") // /* represent intercept all request.
+   public class DemoFilter implements Filter{
+      // ...
+
+      @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        // some hanler before request through. login check or other
+        // ...
+
+       // request through
+        filterChain.doFilter(servletRequest,servletResponse);
+
+        // do something before return client
+        // ...
+
+
+    }
+   }
+   // ...
+   ```
+
+   and add `@ServletComponentScan` in springboot entry.
+
+   ```java
+   // springboot entry
+   @ServletComponentScan
+   @SpringBootApplication
+   public class TliasWebManagementApplication{
+      // ...
+   }
+   ```
+
+   1. could be more `filter` instance, running rules base on class name. for example, `AbcFilter` is running before `BFilter`.
+      p167

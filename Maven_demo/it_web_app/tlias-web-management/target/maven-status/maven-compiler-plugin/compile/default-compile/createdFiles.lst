@@ -5,8 +5,10 @@ com/itheima/TliasWebManagementApplication.class
 com/itheima/controller/UploadController.class
 com/itheima/service/impl/DeptServiceImpl.class
 com/itheima/controller/DeptController.class
+com/itheima/filter/DemoFilter.class
 com/itheima/service/EmpService.class
 com/itheima/pojo/Result.class
+com/itheima/utils/JwtUtils.class
 com/itheima/pojo/Dept.class
 com/itheima/pojo/Emp.class
 com/itheima/mapper/EmpMapper.class
