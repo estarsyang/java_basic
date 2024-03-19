@@ -126,26 +126,35 @@ public class DeptController{
          private String test;
          ```
 
-5. `yml` or `yaml` config file
-   1. Grammar
-      1. be careful to UpperCase and lowerCase
-      2. must be `space` before value
-      3. use indentation to represent layer relationship. no `Tab` must `space`
-      4. `#` represent comment.
-   2. data type
-      1. object/Map
-         ```yml
-         user:
-           name: tom
-         ```
-      2. Array/List/Set
-         ```yml
-         # an Array/List/Set hobby has two values java and c
-         hobby:
-           - java
-           - c
-         ```
-6. `@ConfigurationProperties`
-   auto inject value to the same name variable which in `yml` config file.
+## `yml` or `yaml` config file and `@ConfigurationProperties`
 
-p156
+1.  Grammar
+    1. be careful to UpperCase and lowerCase
+    2. must be `space` before value
+    3. use indentation to represent layer relationship. no `Tab` must `space`
+    4. `#` represent comment.
+2.  data type
+    1. object/Map
+       ```yml
+       user:
+         name: tom
+       ```
+    2. Array/List/Set
+       ```yml
+       # an Array/List/Set hobby has two values java and c
+       hobby:
+         - java
+         - c
+       ```
+3.  `@ConfigurationProperties`
+    auto inject value to the same name variable which in `yml` config file.
+
+## login
+
+1. session: The time interval in which two systems(i.e. the client and the server) communicate with each other can be termed as a session. In simpler terms, a session is a state consisting of several requests and response between the client and the server.
+2. session track: Session tracking is used to record user actions on a website. Maintain client status, server need to identify multiple requests from the same client and share data in a session.
+
+3. cookie and token
+4. JWT
+
+p163

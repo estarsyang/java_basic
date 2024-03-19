@@ -1,7 +1,4 @@
-/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/service/impl/DeptServiceImpl.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/controller/EmpController.java
-/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/controller/DeptController.java
-/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/pojo/Emp.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/pojo/Dept.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/pojo/Result.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/mapper/DeptMapper.java
@@ -10,3 +7,8 @@
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/service/EmpService.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/mapper/EmpMapper.java
 /Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/TliasWebManagementApplication.java
+/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/service/impl/DeptServiceImpl.java
+/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/controller/UploadController.java
+/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/pojo/PageBean.java
+/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/controller/DeptController.java
+/Users/ddayang/Desktop/java_study/java_basic/Maven_demo/it_web_app/tlias-web-management/src/main/java/com/itheima/pojo/Emp.java

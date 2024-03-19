@@ -11,8 +11,7 @@
     </sql>
 
 
-
-<!--    condition update-->
+    <!--    condition update-->
     <select id="update2" resultType="com.itheima.pojo.Emp">
         update emp
         <set>
