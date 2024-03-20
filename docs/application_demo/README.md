@@ -168,6 +168,27 @@ public class DeptController{
       </dependency>
       <!-- ... -->
       ```
+   3. generate
+   ```java
+   public static String generateJwt(Map<String, Object> claims){
+      String jwt = Jwts.builder()
+               .addClaims(claims)
+               .signWith(SignatureAlgorithm.HS256, signKey)
+               .setExpiration(new Date(System.currentTimeMillis() + expire))
+               .compact();
+      return jwt;
+   }
+   ```
+   4. check jwt, need to use `try catch` to surround the `parseJWT` method. error represent the jwt value is not correct.
+   ```java
+   public static Claims parseJWT(String jwt){
+        Claims claims = Jwts.parser()
+                .setSigningKey(signKey)
+                .parseClaimsJws(jwt)
+                .getBody();
+        return claims;
+    }
+   ```
 5. Filter
    intercept request to do some handlers, for example, login check.
    need to add annoation `@WebFilter(urlPatterns = "/*")` in filter class.
@@ -206,4 +227,65 @@ public class DeptController{
    ```
 
    1. could be more `filter` instance, running rules base on class name. for example, `AbcFilter` is running before `BFilter`.
-      p167
+
+6. Interceptor
+   the same as `filter` but provide by `spring` not `Servlet`
+
+   1. Gammar:
+
+      ```java
+      @Component
+      public class LoginCheckInterceptor implements HandlerInterceptor {
+         @Override
+         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+            System.out.println("preHandle ....");
+            return true;
+         }
+
+         @Override
+         public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+            System.out.println("postHandle ....");
+         }
+
+         @Override
+         public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+            System.out.println("afterCompletion ....");
+         }
+      }
+      ```
+
+      ```java
+      @Configuration
+      public class WebConfig implements WebMvcConfigurer {
+
+         @Autowired
+         private LoginCheckInterceptor loginCheckInterceptor;
+
+         @Override
+         public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**");
+         }
+      }
+
+      ```
+
+   2. intercept path
+
+   ```java
+   // ...
+   registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**") //
+            .excludePathPatterns("/login");
+   ```
+
+   | path config | meaning                       | exmaple                                                                                         |
+   | ----------- | ----------------------------- | ----------------------------------------------------------------------------------------------- |
+   | /\*         | first level path              | /depts,/emps and so on, not include /depts/1                                                    |
+   | /\*\*       | any path                      | could intercept any path                                                                        |
+   | /depts/\*   | first level path after /depts | /depts/1, not include /depts/1/2                                                                |
+   | /depts/\*\* | any path after /depts         | /depts,/depts/1,/depts/1/2, not include any path without start with /deps, for example, /emps/1 |
+
+   3. different with `filter`
+      1. filter need to implements `Filter` class, interceptor need to implements `HandlerInterceptor`
+      2. scope different, filter will catch all resources but interceptor only intercept resources what pass into Spring environment
+
+p170
