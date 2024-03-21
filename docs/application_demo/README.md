@@ -288,4 +288,17 @@ public class DeptController{
       1. filter need to implements `Filter` class, interceptor need to implements `HandlerInterceptor`
       2. scope different, filter will catch all resources but interceptor only intercept resources what pass into Spring environment
 
-p170
+## Error handle
+
+define a global error handle class to catch all error.
+
+1. annotion
+   1. `@RestControllerAdvice`
+   2. `@ExceptionHandler`
+
+## Spring transaction and AOP
+
+1. Spring transaction
+   using `@Transactional`
+
+p172
