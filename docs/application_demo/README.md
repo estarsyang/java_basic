@@ -292,13 +292,76 @@ public class DeptController{
 
 define a global error handle class to catch all error.
 
-1. annotion
+1. annotation
    1. `@RestControllerAdvice`
    2. `@ExceptionHandler`
 
 ## Spring transaction and AOP
 
-1. Spring transaction
-   using `@Transactional`
+1.  Spring transaction
+    using `@Transactional` to annotate class or others. Usually annotate implemention of service which business operation.
 
-p172
+2.  properties
+
+    1. rollbackFor: only appear `RuntimeException` will emit rollback in default case. `rollbackFor` use to control which type exception will emit rollback.
+       ```java
+       // ...
+       @Transactional(rollbackFor= Exception.class) // all exception will emit rollback.
+       // ...
+       ```
+    2. propagation: When a transaction method is called by another transaction method, how to do transaction controller.
+       for example, b is called by a and both of them are transaction. a start a transaction, when calling b, b will join the transaction or create a new transaction?
+
+       ```java
+       @Transactional
+       public void a(){
+          // ...
+          userService.b();
+          // ...
+       }
+
+       @Transactional
+       public void b(){
+          // ...
+       }
+
+       ```
+
+    | property value   | meaning                                                                                             |
+    | ---------------- | --------------------------------------------------------------------------------------------------- |
+    | **REQUIRED**     | default value, need transaction, if it exist transaction and join. if not, create a new transaction |
+    | **REQUIRED_NEW** | need a new transaction, always create a new. if we wish not effect between transactions, use it.    |
+    | SUPPORTS         | support transation, if exits and join, if not, run in no transaction status.                        |
+    | NOT_SUPPORTED    | no support transaction, run in no transaction status. if exist, will be suspended                   |
+    | MANDATORY        | must exist transaction, otherwise error                                                             |
+    | NEVER            | must no transaction, otherwise error                                                                |
+
+         ```java
+
+         @Transactional
+         public void a(){
+         // ...
+         userService.b();
+         // ...
+         }
+
+         @Transactional(propagation = Propagation.REQUIRED)
+         public void b(){
+         // ...
+         }
+
+         ```
+
+## AOP
+
+1. meaning: Aspect Oriented Programming, orient the special method to code.
+   1. springAOP case: calculate cost time when business layers' methods run.
+      1. steps
+         1. import dependency
+         2. coding AOP.
+      2. annotation:
+         1. `@Component`
+         2. `@Aspect`
+         3. `@Around`
+
+p176
