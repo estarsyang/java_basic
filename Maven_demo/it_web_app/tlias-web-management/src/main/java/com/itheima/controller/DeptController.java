@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.pojo.Dept;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
@@ -49,6 +50,7 @@ public class DeptController {
      * @param id id
      * @return Result
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
 
@@ -63,6 +65,7 @@ public class DeptController {
      * @param dept
      * @return
      */
+    @Log
     @PostMapping()
     public Result add(@RequestBody Dept dept){
         log.info("新增部门:{}", dept);
@@ -76,6 +79,7 @@ public class DeptController {
      * @param dept
      * @return Result
      */
+    @Log
     @PutMapping()
     public Result update(@RequestBody Dept dept){
 

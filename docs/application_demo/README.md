@@ -383,6 +383,10 @@ define a global error handle class to catch all error.
    2. Notes:
       1. `@Around` must call `ProceedingJoinPoint.proceed()` to run original method, other advices no need.
       2. return value must be Object when using `@Around`, to accept return value from original methods.
+   3. order: when a joinpoint is called, all advices which is bind in the method will be run, they have running order.
+      1. `@Before`: base on letter, the higher the alphabet ranking, the first to execute
+      2. `@After`: base on letter, the lower the alphabet ranking, the first to execute
+      3. `@Order`: using `@Order` in aspect class to order ranking, `@Order(1)` first to execute, `@Order(2)` second.
 4. PointCut
 
    1. Extract common pointcut expression.
@@ -396,4 +400,51 @@ define a global error handle class to catch all error.
       // ....
       ```
 
-p178
+   2. expression types
+      1. execution
+      2. annotation
+   3. execution expression
+      1. grammar:
+         `execution(accessModifier? returnvalue packageName.className.?methodName(arguments) throws exception?)`, for example, `@Before("execution(public void com.itheima.service.impl.DeptServiceImpl.detele(java.lang.Integer))")`
+         1. accessModifier: public
+         2. packageName.className: can be omitted
+         3. throws exception: can be ommitted
+      2. wildcard
+         1. `*`: single alone any signal，one argument, could represent any return value, class name, package name and so on.
+            `execution(* com.*.service.*.update*(*))`
+         2. `..`: multiple any signal, could match any level package, any type, any arguments.
+            `execution(* com.itheima..DeptService.*(..))`
+      3. could use `&&`, `||` and `!` to join complex expression.
+   4. annotion expression
+      use to match special annotion method
+      1. example: `@Before("@annotion(com.itheima.anno.Log)")`, `Log` is self defined annotion.
+
+5. JoinPoint
+   Using `JoinPont` could get informations which method is called, such as target class name, method name, class arguments and so on.
+   1. use
+      1. in `@Around`, using `ProceedingJoinPoint`.
+      ```java
+      @Around("execution(* com.itheima.service.DeptService.*(..))")
+      public Object around(ProceedingJoinPoint proceedingJoinPoint) {
+         // ...
+      }
+      ```
+      2. in other advices, using `JoinPont`, the father class of `ProceedingJoinPoint`.
+      ```java
+      @Before("execution(* com.itheima.service.DeptService.*(..))")
+      public Object before(JoinPoint joinPont) {
+         // ...
+      }
+      ```
+   2. get informations by using `proceedingJoinPoint` or `joinPont`
+      1. get class name: `proceedingJoinPoint.getTarget().getClass().getName()`
+      2. get method name: `proceedingJoinPoint.getSignature().getName()`
+      3. get method running arguments: `proceedingJoinPoint.getArgs()`
+      4. running target method: `proceedingJoinPoint.proceed()`
+      5. ger return value when target method running: `Object result =  proceedingJoinPoint.proceed(); return result;`
+6. AOP case: record operation log, operation including save, delete and update, log including operator, time, full class name,method name, running arguments, return value,method running cost time.
+   1. thinking:
+      1. advice: _method running cost time_, need to get before and after, using `@Around`
+      2. pointcut: `save, delete and update` no regular, using `@annotion`, self defined annotion `@Log`.
+      3. tables: create a new table to record log
+      4. class: create a new class to represent log content.
