@@ -355,6 +355,7 @@ define a global error handle class to catch all error.
 ## AOP
 
 1. meaning: Aspect Oriented Programming, orient the special method to code.
+
    1. springAOP case: calculate cost time when business layers' methods run.
       1. steps
          1. import dependency
@@ -364,4 +365,35 @@ define a global error handle class to catch all error.
          2. `@Aspect`
          3. `@Around`
 
-p176
+2. key concern
+
+   1. JoinPoint: those methods what could be proxy.
+   2. Advice: common logic to use in all join points.
+   3. PointCut: a pointcut is a set of join points, pointcut specifies where exactly to apply advice, which allows separation of concerns and helps in modularizing business logic.
+   4. Taget: which class need to use AOP.
+   5. Aspect:
+
+3. Advice
+   1. type:
+      1. `@Around`: around advice, represent advice will be run before and after target method running.
+      2. `@Before`: before advice, run before target method.
+      3. `@After`: after advice, run after the target method is executed， whatever target method will throw error
+      4. `@AfterReturning`: advice after return, run after the target method execution, no running if exist exception
+      5. `@AfterThrowing`: advice after exception, run after throw exception
+   2. Notes:
+      1. `@Around` must call `ProceedingJoinPoint.proceed()` to run original method, other advices no need.
+      2. return value must be Object when using `@Around`, to accept return value from original methods.
+4. PointCut
+
+   1. Extract common pointcut expression.
+
+      ```java
+      // aspect class
+      @Pointcut("execution(* com.itheima.service.*.*(..))")
+      private void pt(){}
+
+      @Around("pt()")
+      // ....
+      ```
+
+p178
