@@ -372,3 +372,40 @@ private EmpService empService;
 @Resource(name="empServiceB")
 private EmpService empService;
 ```
+
+## module design and develop
+
+## maven inherit
+
+1. package method
+   1. jar: SpringBoot project usually is jar.
+   2. war: web package
+   3. pom: parent project or aggregation project, no code, just dependencies management.
+
+`<parent><parent>`
+
+## version lock
+
+1. common defined
+   `<dependencyManagement></dependencyManagement>`
+2. self properties
+
+```xml
+<!-- parent pom.xml -->
+    <properties>
+        <lomnok.version>1.18.24</lomnok.version>
+    </properties>
+
+    <!-- use properties, could be use in same pom.xml file -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lomnok.version}</version>
+        </dependency>
+    </dependencies>
+```
+
+## maven aggregation
+
+Organize multiple modules into a whole， and doing project build. need a agression project(only have a `pom` file).
